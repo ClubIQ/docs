@@ -1,0 +1,11 @@
+{
+  "title": "Loja",
+  "pages": [
+    "index",
+    "produtos",
+    "encomendas",
+    "vendas",
+    "configuracoes",
+    "loja-publica"
+  ]
+}

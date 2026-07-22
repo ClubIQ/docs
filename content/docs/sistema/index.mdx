@@ -1,0 +1,50 @@
+---
+title: O sistema trabalha por si
+description: Uma visão geral dos comportamentos automáticos que apoiam a operação do clube sem trabalho manual.
+---
+
+Muitas coisas no ClubIQ BackOffice acontecem automaticamente nos bastidores. É isso que ajuda a equipa
+do clube a evitar trabalho repetitivo e a manter a operação diária a funcionar.
+
+Esta secção existe para responder a uma pergunta operacional simples: "Porque é que isto mudou sozinho?".
+Cada página explica um automatismo relevante para o cliente, o resultado que cria e onde esse efeito
+fica visível no BackOffice.
+
+<Callout title="Em que é que esta secção se foca">
+Estas páginas explicam o comportamento do produto do ponto de vista do clube. Evitam detalhe interno
+de engenharia e ficam centradas no que a equipa consegue observar ou usar.
+</Callout>
+
+## O que corre automaticamente
+
+O BackOffice pode automaticamente:
+
+| Comportamento automático | Para que serve | Onde se nota |
+|---|---|---|
+| Geração de quotas | Cria novos períodos mensais quando passam a estar devidos | Ficha do sócio e área de filiação |
+| Geração de mensalidades de atleta | Mantém os períodos de cobrança dos atletas atualizados | Ficha do atleta e área de mensalidades |
+| Atualização de classes por idade | Ajusta a classe do sócio quando as regras de idade se aplicam | Ficha do sócio |
+| Acompanhamento de pagamentos | Envia lembretes e atualiza estados de pagamentos | Área de pagamentos e histórico do sócio |
+| Criação de recorrências de eventos | Adiciona as próximas ocorrências de eventos recorrentes | Calendário de eventos |
+| Regras de limpeza segura | Fecha o ciclo de limpeza de dados depois da janela de recuperação | O registo deixa de estar disponível para recuperar |
+
+<Callout title="O que esperar" type="info">
+Se um valor, estado ou lista mudar sem ninguém editar manualmente, isso é muitas vezes comportamento
+esperado do sistema e não um erro. Estes guias ajudam a perceber a diferença.
+</Callout>
+
+## Explorar os automatismos
+
+<Cards>
+  <Card title="Quotas automáticas" href="/docs/sistema/quotas-automaticas" description="Como aparecem as quotas dos sócios ao longo do tempo e porque o estado da filiação pode mudar." />
+  <Card title="Classes por idade" href="/docs/sistema/classes-por-idade" description="Como as mudanças de classe acontecem quando um sócio entra num novo escalão etário." />
+  <Card title="Mensalidades de atleta" href="/docs/sistema/mensalidades-de-atleta" description="Como os períodos de cobrança dos atletas são criados e atualizados." />
+  <Card title="Notificações automáticas" href="/docs/sistema/notificacoes-automaticas" description="Como são tratados os lembretes e as mensagens ligadas a pagamentos." />
+  <Card title="Limpezas automáticas" href="/docs/sistema/limpezas-automaticas" description="O que acontece depois de terminarem as janelas de recuperação de registos apagados." />
+</Cards>
+
+## Porque isto importa
+
+O objetivo destas regras de bastidores é reduzir trabalho repetitivo no clube. Em vez de obrigar a
+equipa a lembrar-se de cada passo operacional, o ClubIQ trata automaticamente das atualizações
+previsíveis e deixa o resultado visível nos ecrãs que já usa no dia a dia.

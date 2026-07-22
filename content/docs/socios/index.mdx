@@ -1,0 +1,65 @@
+---
+title: Sócios
+description: A lista de sócios do clube, sinais de estado de filiação, filtros e ações principais da linha.
+---
+
+O módulo **Sócios** é o CRM e o registo de filiação do clube. Guarda dados de identidade, morada,
+número de contribuinte, classe e estado atual da quota de cada sócio. É distinto dos **Atletas**
+(inscrição desportiva) e dos **Utilizadores da App** (contas de login na aplicação móvel).
+
+## A lista de sócios
+
+A página **Sócios** mostra uma linha por sócio, com colunas como:
+
+| Coluna | Significado |
+|---|---|
+| **Número de Sócio** | Atribuído automaticamente apenas após o primeiro pagamento. Até lá, o sócio não tem número. |
+| **Nome Completo** | O nome do sócio. |
+| **Email** | Email de contacto e email de login da app, se existir conta de app. |
+| **Classe de Sócio** | A classe etária ou classe atribuída manualmente. |
+| **Desconto** | O desconto atualmente ativo para essa classe, quando aplicável. |
+| **Estado de Filiação** | O estado atual da filiação. |
+| **Criado em** | Quando o registo foi criado. |
+
+## Estado de filiação
+
+O chip de estado de filiação na tabela é a verdade operacional:
+
+- **Ativo** significa que o sócio está em dia
+- **Em dívida** significa que pelo menos um período de quota está em atraso
+- **Sem filiação** significa que o registo do sócio existe, mas a filiação ainda não foi criada
+
+Para detalhes a nível de período, consulte [Quotas e filiação](/docs/socios/quotas-e-filiacao).
+
+## Filtros e exportação
+
+A lista pode ser filtrada por nome, número de sócio, classe ou estado de filiação, consoante os
+filtros ativados na página. **Exportar** descarrega o conjunto de resultados atualmente visível, o que é útil
+para tesouraria ou relatórios.
+
+## Ações por linha
+
+Cada linha inclui ações rápidas como:
+
+- **Editar** para abrir o formulário de edição do sócio
+- **Eliminar** para iniciar o ciclo de eliminação suave
+
+## Abrir a ficha do sócio
+
+Clique em qualquer ponto da linha, fora dos botões de ação, para abrir a
+[ficha do sócio](/docs/socios/ficha-do-socio).
+
+![Lista de sócios com número de sócio, nome completo, email, classe, desconto, estado de filiação e data de criação](/images/guide/socios/lista.png)
+
+<InfoCallout title="Nos bastidores">
+O estado de filiação é derivado dos períodos de quota. Quando o sistema gera uma nova quota em dívida, o
+sócio pode passar automaticamente para **Em dívida** sem que ninguém edite o registo manualmente.
+</InfoCallout>
+
+## Próximo passo
+
+<Cards>
+  <Card title="Criar sócio" href="/docs/socios/criar-socio" />
+  <Card title="Ficha do sócio" href="/docs/socios/ficha-do-socio" />
+  <Card title="Quotas e filiação" href="/docs/socios/quotas-e-filiacao" />
+</Cards>

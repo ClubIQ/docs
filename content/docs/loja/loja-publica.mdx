@@ -1,0 +1,26 @@
+---
+title: Loja pública
+description: Percurso do comprador em `/loja`, desde o catálogo até ao checkout e pagamento.
+---
+
+A **loja pública** vive em **`/loja`** e não exige sessão iniciada no BackOffice. O percurso normal é:
+
+1. catálogo;
+2. página de produto;
+3. carrinho;
+4. checkout;
+5. redireção para pagamento.
+
+## O que o comprador pode encontrar
+
+- catálogo de produtos ativos com variantes disponíveis;
+- link direto para um produto específico em `/loja/:productId`;
+- link direto para checkout em `/loja/checkout`;
+- aviso de loja fechada quando a vitrina pública está desligada.
+
+## Como isto se liga ao BackOffice
+
+- o catálogo vem da área [Produtos](/docs/loja/produtos);
+- as compras passam para [Encomendas](/docs/loja/encomendas);
+- as regras da vitrina pública vivem em [Configurações](/docs/loja/configuracoes).
+

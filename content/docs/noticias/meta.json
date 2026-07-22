@@ -1,0 +1,9 @@
+{
+  "title": "Notícias",
+  "pages": [
+    "index",
+    "lista-de-noticias",
+    "editor",
+    "publicar-e-agendar"
+  ]
+}

@@ -1,0 +1,78 @@
+---
+title: Mensalidades de atleta
+description: Como são gerados automaticamente os períodos de cobrança dos atletas inscritos em modalidades, e o que acontece ao encerrar uma inscrição.
+---
+
+Os atletas são cobrados por um modelo diferente do dos sócios: não têm "filiação", têm **inscrições ativas** em modalidades/escalões, e o valor mensal é a soma do que cada inscrição custa nesse escalão. Esta página explica como esses períodos de cobrança nascem sozinhos, todas as noites.
+
+## Quando corre
+
+Todos os dias às 00:10 (UTC) — dez minutos depois do job que gera as quotas dos sócios (ver [Quotas automáticas](/docs/sistema/quotas-automaticas)).
+
+<Callout title="Nos bastidores">
+O desfasamento de dez minutos entre os dois jobs existe para evitar que ambos disputem os mesmos recursos ao mesmo tempo. Não tem qualquer efeito prático para a equipa do clube — apenas explica porque as quotas de sócios e as mensalidades de atletas não aparecem exatamente à mesma hora.
+</Callout>
+
+## Como nasce um período de mensalidade
+
+<Steps>
+<Step>
+Para cada inscrição ativa de um atleta numa modalidade/divisão, o sistema avança a partir do último mês já faturado até ao **mês atual** (em hora local do clube), criando um período de mensalidade para cada mês em falta.
+</Step>
+<Step>
+O preço de cada período é **derivado do escalão** (divisão/modalidade) em que o atleta está inscrito nesse momento — não é um valor fixo por atleta.
+</Step>
+<Step>
+No mesmo passo, o sistema verifica se houve alguma modalidade adicionada a meio da época a um atleta que já tinha meses pagos, e lança automaticamente o valor em falta desse mês ("reconciliação" de suplementos) — ver secção seguinte.
+</Step>
+</Steps>
+
+### O que o operador vê
+
+Um atleta recém-inscrito pode não mostrar a dívida na lista de atletas do BackOffice até este job correr durante a noite — a não ser que a própria equipa do clube, ou o atleta, abra o ecrã de checkout, que materializa o período na hora, tal como o job faria.
+
+O estado de dívida de um atleta é sempre calculado a partir dos períodos existentes, com três valores possíveis:
+
+| Estado | O que significa |
+|---|---|
+| Em dívida | Existe pelo menos um período em dívida anterior ao mês atual do clube |
+| Por pagar | Só o mês atual está por pagar |
+| Em situação regular | Não há períodos em dívida |
+
+## Ajustes e descontos
+
+Se um atleta tiver um ajuste de plano (desconto) criado, editado ou removido, os meses já materializados mas ainda **não pagos** são recalculados de imediato — não é preciso esperar pelo job noturno para um desconto novo se refletir num mês ainda por pagar. Já os meses **pagos** ficam "congelados": mantêm o valor com que foram pagos e nunca são recalculados, mesmo que o desconto mude depois.
+
+<Callout title="Nos bastidores">
+Alterar o preço mensal de uma divisão/modalidade em Gestão Desportiva não é retroativo: só afeta os meses ainda não materializados. Um mês já gerado (pago ou não) mantém o valor com que nasceu, tal como acontece com as quotas de sócio.
+</Callout>
+
+## Adicionar uma modalidade a meio da época
+
+Quando a equipa do clube adiciona uma nova inscrição a um atleta que já tem meses pagos ou em dívida nessa época, o sistema cobra automaticamente o valor em falta dessa nova modalidade para os meses já alcançados — isto acontece de imediato, na mesma operação de adicionar a inscrição, não à noite:
+
+- Se o mês em questão já estava **pago**, é criada uma linha extra de suplemento só com o custo da nova modalidade para esse mês — aparece como um período próprio, distinto do mês normal.
+- Se o mês ainda estava **por pagar**, o custo da nova modalidade é simplesmente somado ao valor desse mês.
+- Meses **futuros já pagos antecipadamente** nunca são cobrados de imediato por uma modalidade nova — isso deixaria um atleta com pagamento antecipado artificialmente "em dívida" pelo resto da época. Em vez disso, o suplemento desses meses futuros só é lançado à medida que cada mês vai sendo alcançado (pelo job noturno, ou por um checkout do próprio atleta).
+
+## O que acontece ao encerrar uma inscrição
+
+Remover/encerrar uma inscrição de um atleta anula qualquer cobrança **ainda não paga** que essa inscrição tenha originado — apaga períodos de suplemento sem custo associado e recalcula os meses ainda por pagar sem essa modalidade. Ou seja, se uma modalidade for adicionada e removida no mesmo dia, não fica nada por pagar relacionado com ela.
+
+O que já foi pago não é devolvido automaticamente por encerrar a inscrição — qualquer reembolso de um mês já pago tem de ser feito manualmente à parte.
+
+## Perguntas frequentes
+
+<Accordions>
+<Accordion title="Inscrevi um atleta hoje e não aparece nada a pagar. É normal?">
+Sim, pode ser normal. A dívida de uma inscrição nova só é materializada pelo job noturno das 00:10, a não ser que alguém abra o ecrã de checkout do atleta primeiro, o que gera o período de imediato.
+</Accordion>
+<Accordion title="Se eu adicionar uma modalidade a um atleta que já tem o ano todo pago, ele fica em dívida imediatamente por todos os meses futuros?">
+Não. Só os meses já alcançados são cobrados de imediato (como suplemento, se já estavam pagos). Os meses futuros só são cobrados à medida que forem sendo alcançados.
+</Accordion>
+<Accordion title="Porque é que um mês pago de um atleta não mudou de valor depois de eu ter aplicado um desconto?">
+Porque meses já pagos ficam congelados no valor com que foram pagos — descontos aplicados depois só afetam meses ainda não pagos.
+</Accordion>
+</Accordions>
+
+Para o mecanismo equivalente do lado dos sócios, ver [Quotas automáticas](/docs/sistema/quotas-automaticas). Para gerir inscrições e escalões, ver [Gestão Desportiva](/docs/gestao-desportiva) e [Atletas](/docs/atletas).

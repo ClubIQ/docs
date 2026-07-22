@@ -1,0 +1,119 @@
+---
+title: Criar novo evento
+description: Como criar um jogo ou outro tipo de evento, passo a passo, incluindo recorrência e o estado inicial de visibilidade.
+---
+
+Criar um evento abre um assistente em vários passos. Pode iniciá-lo pelo botão de criação no topo do calendário, clicando diretamente numa célula vazia do calendário (a data fica pré-preenchida), ou pelo atalho de teclado **Ctrl/Cmd+K**.
+
+## Passo 0 — escolher o tipo de evento
+
+O primeiro ecrã pergunta **"Que tipo de evento está a criar?"** e apresenta duas opções em cartão:
+
+- **Jogo** — "Agende um jogo competitivo entre duas equipas".
+- **Outro Evento** — "Treinos, reuniões e todos os outros eventos".
+
+Esta escolha determina os passos seguintes do assistente: um jogo tem um passo **Detalhes do Jogo** obrigatório (adversário, resultado, competição); um "Outro Evento" pede logo o tipo concreto (por exemplo, Treino, Reunião ou Evento Social, consoante os tipos configurados para o seu clube) num campo próprio.
+
+![Ecrã inicial do assistente com a escolha entre Jogo e Outro Evento](/images/guide/eventos/criar-escolher-tipo.png)
+
+## Criar um "Outro Evento" (treino, reunião, evento social...)
+
+<Steps>
+<Step>
+
+No passo **Informação Geral**, escolha o **Tipo de Evento** (por exemplo, Treino, Reunião ou Evento Social, consoante os tipos configurados para o seu clube) e preencha o **Título do Evento** (até 150 caracteres).
+
+</Step>
+<Step>
+
+Preencha o **Local** e a **Morada** do evento (ambos opcionais para este tipo de evento).
+
+</Step>
+<Step>
+
+Defina a **Hora de Início** e a **Hora de Fim** (formato `DD/MM/AAAA HH:mm`). A hora de fim tem de ser posterior à hora de início.
+
+</Step>
+<Step>
+
+Se o evento se repetir, escolha uma **Frequência** — Diária, Semanal, Mensal ou Anual — e defina **Repetir Até**. Deixe a Frequência em "Não repete" para um evento único. Ver a secção [Recorrência](#recorrência) abaixo para o que isto implica.
+
+</Step>
+<Step>
+
+Escreva uma **Descrição** opcional (até 2000 caracteres) e avance para o passo **Detalhes Adicionais** (opcional) — capacidade, imagem de capa, galeria e associação a Modalidade/Escalão/Época. Este passo está descrito em detalhe em [Galeria do Evento](/docs/eventos/galeria-do-evento).
+
+</Step>
+<Step>
+
+No rodapé, confirme o **Estado** do evento (ver [Estado inicial](#estado-inicial-e-visibilidade) abaixo) e clique em **Criar Evento**.
+
+</Step>
+</Steps>
+
+![Formulário de criação de um evento do tipo Outro Evento, com título, local e horário](/images/guide/eventos/criar-outro-evento.png)
+
+## Criar um Jogo
+
+<Steps>
+<Step>
+
+No passo **Informação Geral**, o título não é pedido — é gerado automaticamente a partir dos nomes das equipas. Defina apenas a **Hora de Início** e a **Hora de Fim**.
+
+</Step>
+<Step>
+
+No passo **Detalhes do Jogo** (obrigatório), escolha a **Competição** existente na lista, ou escreva um nome novo — se não corresponder a nenhuma competição existente, o sistema cria uma automaticamente em estado de rascunho, associada a este jogo.
+
+</Step>
+<Step>
+
+Selecione a **Modalidade / Escalão / Época** — neste passo, ao contrário de um evento normal, esta seleção é obrigatória.
+
+</Step>
+<Step>
+
+No cartão de confronto, escolha o **adversário** através da pesquisa de clubes. Use o ícone de trocar casa/fora para alternar se o seu clube joga em casa ou fora. Se o adversário tiver mais do que um escalão registado, escolha o escalão correto na lista adicional que aparece.
+
+</Step>
+<Step>
+
+Preencha o **Local** e a **Morada** do jogo — obrigatórios para jogos. Se o seu clube jogar em casa, estes campos preenchem-se automaticamente com o local de jogo registado do clube (só quando estiverem vazios).
+
+</Step>
+<Step>
+
+Se já tiver o **Resultado**, registe os golos de casa e fora — este campo é opcional e pode ser preenchido mais tarde, ao editar o evento.
+
+</Step>
+<Step>
+
+Avance para **Detalhes Adicionais** (opcional) para capacidade, imagem de capa e galeria, e confirme o **Estado** no rodapé antes de clicar em **Criar Evento**.
+
+</Step>
+</Steps>
+
+Um jogo nunca é recorrente — a opção de repetição não existe para este tipo de evento.
+
+## Estado inicial e visibilidade
+
+Ao criar um evento, o campo **Estado** no rodapé começa por defeito em **Em Planeamento**. Isto significa que o evento é gravado mas **não fica visível** para sócios ou atletas — apenas o staff do backoffice o consegue ver. Se confirmar a criação com o estado ainda em Em Planeamento, aparece um aviso:
+
+> **Evento em Planeamento - não visível para os membros**
+> Este evento será criado em estado de Planeamento e ainda não será visível para os membros. Apenas o pessoal do backoffice o poderá ver. Pode publicá-lo mais tarde alterando o estado.
+
+Para publicar o evento imediatamente, mude o Estado para **Automático** (o estado passa a derivar-se sozinho das datas — Agendado, Em Curso ou Concluído) ou, se for o caso, deixe-o como **Cancelado**.
+
+<Callout title="Nos bastidores">
+  Criar ou editar um evento **não envia nenhuma notificação push nem email** aos sócios ou atletas. Não existe um passo de "avisar os membros" neste assistente — os sócios só descobrem o evento novo ao abrir a aplicação, ou ao verem o botão de RSVP se tiver sido definida uma capacidade.
+</Callout>
+
+## Recorrência
+
+O campo **Frequência** só está disponível para eventos que não sejam Jogo, e tem quatro opções: Diária, Semanal, Mensal, Anual. Cada opção mantém o dia da semana e a hora local da data inicial — por exemplo, uma frequência Semanal repete-se sempre no mesmo dia da semana e à mesma hora local. O campo **Repetir Até** só fica ativo depois de escolher uma frequência, e a data tem de ser igual ou posterior à hora de início.
+
+<Callout title="Nos bastidores">
+  Criar uma série recorrente não gera de imediato todas as ocorrências futuras até à data de "Repetir Até". No momento em que grava o evento, o sistema materializa logo as ocorrências mais próximas (hoje e amanhã); as restantes são preenchidas automaticamente à medida que se aproxima a data, através de um processo periódico que corre em segundo plano. Editar datas, frequência ou "Repetir Até" de uma série já criada pode ser recusado pelo sistema se alguma ocorrência visada já tiver presenças ou check-ins registados — nesse caso, a única forma de alterar o calendário é desativar a recorrência a partir do painel de detalhe do evento.
+</Callout>
+
+Para associar imagens ao evento durante a criação, veja [Galeria do Evento](/docs/eventos/galeria-do-evento). Para consultar ou editar um evento depois de criado, veja [Eventos](/docs/eventos).

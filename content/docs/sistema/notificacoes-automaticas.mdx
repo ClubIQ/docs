@@ -1,0 +1,87 @@
+---
+title: Notificações automáticas
+description: Emails de regularização, o reenvio do link de primeiro pagamento e o que significa Iniciado por Sistema nos pagamentos.
+---
+
+Além das quotas e mensalidades que nascem sozinhas, o sistema também comunica sozinho com os sócios em três situações concretas: lembretes de regularização, reenvio do link de primeiro pagamento, e a reconciliação silenciosa de pagamentos pendentes. Esta página explica as três, e o que significa ver **Iniciado por: Sistema** num pagamento.
+
+## Emails de regularização
+
+Este é o único job automático cuja periodicidade a própria equipa do clube configura — não é um horário fixo. Configura-se em **Pagamentos → separador Notificações**, no cartão **"Notificações de regularização"**.
+
+### Onde configurar
+
+<Steps>
+<Step>
+Abra **Pagamentos → Notificações**.
+</Step>
+<Step>
+Ative o interruptor **"Ativar emails de regularização"**. Por omissão está desligado — cada clube tem de o ligar explicitamente.
+</Step>
+<Step>
+Defina **"Primeira notificação após"** — quantos dias depois de o sócio ficar em dívida é enviado o primeiro email.
+</Step>
+<Step>
+Defina **"Relembrar a cada"** — de quantos em quantos dias o sistema volta a lembrar o mesmo sócio, caso continue em dívida.
+</Step>
+<Step>
+Defina **"Número máximo de emails por membro"** — deixe em branco para não haver limite.
+</Step>
+<Step>
+Defina a **"Hora de envio"**. Este campo é preenchido em **hora local do clube** — o ecrã mostra o fuso horário configurado do clube junto ao campo, e converte automaticamente essa hora para UTC ao guardar.
+</Step>
+<Step>
+Clique em **Guardar**.
+</Step>
+</Steps>
+
+![Separador de Notificações em Pagamentos, com as definições de emails de regularização](/images/guide/pagamentos/notificacoes.png)
+
+### O que o job faz, todos os dias, à hora configurada
+
+- Percorre os sócios com valores por regularizar e verifica quais se tornaram elegíveis há já o número de dias definido em "Primeira notificação após".
+- Não volta a enviar a um sócio antes de passarem os dias definidos em "Relembrar a cada" desde o último envio.
+- Se "Número máximo de emails por membro" estiver definido, para de enviar a esse sócio depois de atingido o limite — mesmo que continue em dívida.
+- Envia um email com um link para o portal de pagamento.
+- Se pelo menos um dos valores em dívida for uma **quota mensal** (não uma taxa avulsa), envia também uma notificação push para a aplicação móvel do sócio.
+
+<Callout title="Nos bastidores">
+Este job corre por clube — cada clube tem o seu próprio horário e a sua própria configuração, ligada ou desligada independentemente dos outros. Guardar as definições neste ecrã atualiza imediatamente o horário desse envio; não é preciso reiniciar nada. Não existe, hoje, um botão "enviar agora" — a equipa do clube só pode afinar o horário e a cadência, não disparar um envio manual avulso.
+</Callout>
+
+## Reenvio do link de primeiro pagamento
+
+Quando um sócio se auto-regista pela aplicação móvel, recebe um email com um link de pagamento para completar a primeira quota. Se, por qualquer motivo, esse email inicial falhar ou não chegar, o sistema tem uma rede de segurança: **a cada 15 minutos**, verifica se há sócios ainda no estado **Pendente de Pagamento** há mais de 15 minutos desde o registo, e reenvia o link.
+
+Este processo não tem nenhum ecrã próprio no BackOffice — é inteiramente invisível, e serve apenas para garantir que um sócio que se auto-registou não fica "preso" sem forma de completar o pagamento. É seguro correr repetidamente: não envia o mesmo link duplicado ao mesmo sócio de forma descontrolada.
+
+## Reconciliação de pagamentos pendentes
+
+De 5 em 5 minutos, o sistema verifica junto do fornecedor de pagamentos (Multibanco, MB Way e métodos semelhantes) o estado de qualquer pagamento que esteja **Pendente** há mais de alguns minutos. Isto fecha uma pequena janela em que um sócio já pagou por referência multibanco, mas a confirmação automática (webhook) do banco ainda não chegou ao sistema.
+
+**Onde se vê o efeito:** um pagamento que estava **Pendente** passa a **Concluído** no histórico de pagamentos e na ficha do sócio, tipicamente dentro de 5 a 10 minutos, sem que ninguém precise de confirmar nada manualmente.
+
+## O que significa "Iniciado por: Sistema"
+
+No histórico de pagamentos, a coluna **Iniciado por** mostra sempre um de três valores: **Sistema**, **Membro** ou **Administrador** (com o nome do operador quando é um administrador). Um pagamento aparece como **Iniciado por: Sistema** em dois casos:
+
+- Quando o job de [quotas automáticas](/docs/sistema/quotas-automaticas) gera uma quota com valor 0 € (sócio com desconto de 100%) — o sistema cria automaticamente um pagamento já concluído, para que a quota fique como paga desde o início, sem esperar por ninguém.
+- Noutras situações em que o valor devido é integralmente coberto por um desconto de classe ativo no momento da geração do período.
+
+Não é preciso investigar estes pagamentos como se fossem um erro — é o comportamento esperado para sócios totalmente isentos.
+
+## Perguntas frequentes
+
+<Accordions>
+<Accordion title="Um sócio disse que não recebeu o email de regularização. O que verificar?">
+Confirme primeiro que o interruptor "Ativar emails de regularização" está ligado em Pagamentos → Notificações, e que já passaram os dias definidos em "Primeira notificação após" desde que o sócio ficou em dívida. Verifique também se o número máximo de emails por membro não foi já atingido.
+</Accordion>
+<Accordion title="Um sócio pagou por Multibanco e o pagamento ainda aparece Pendente. É normal?">
+Sim, durante alguns minutos. A reconciliação automática corre de 5 em 5 minutos e deve atualizar o estado para Concluído pouco depois. Se continuar Pendente muito mais tempo do que isso, vale a pena investigar com o fornecedor de pagamentos.
+</Accordion>
+<Accordion title="Porque aparece um pagamento como Iniciado por: Sistema sem que ninguém o tenha registado?">
+Porque a quota em causa tinha valor 0 € devido a um desconto de classe de 100%, e o sistema marca-a automaticamente como paga assim que a gera. Não é um erro.
+</Accordion>
+</Accordions>
+
+Para configurar a hora de envio e a cadência dos emails de regularização, ver o separador **Pagamentos → Notificações**. Para o mecanismo que gera as quotas em primeiro lugar, ver [Quotas automáticas](/docs/sistema/quotas-automaticas).

@@ -1,0 +1,90 @@
+---
+title: Quotas automáticas
+description: Como nascem as quotas mensais dos sócios sem qualquer clique, e porque o estado da filiação pode mudar sozinho.
+---
+
+As quotas mensais dos sócios não são criadas por uma pessoa — nascem sozinhas, todas as noites, através de um job que corre à meia-noite (UTC). Esta página explica a mecânica completa: quando um período de quota aparece, qual o valor que traz, e porque o **Estado da Filiação** de um sócio pode mudar sem que ninguém lhe tenha tocado.
+
+## Não existe "início de época" automático
+
+É importante começar por esclarecer um mal-entendido comum: **não existe nenhum job que faça o "rollover" automático da época do clube.** A criação de uma nova época é sempre uma ação manual, feita por alguém da equipa. O que acontece sozinho é outra coisa, mais simples: todos os dias, um job de "atualização diária" verifica quais as filiações cujo último período de quota já terminou, e gera o período seguinte para essas filiações.
+
+Por isso esta funcionalidade funciona mais como um mecanismo de recuperação (*catch-up*) do que como um calendário fixo de "dia 1 de cada mês". Se o sistema estiver indisponível durante vários dias, na primeira vez que o job voltar a correr ele cria todos os meses em falta de uma só vez, não apenas o mês mais recente.
+
+## Como nasce uma quota mensal
+
+<Steps>
+<Step>
+**Todos os dias à meia-noite (UTC)**, o sistema procura todas as filiações cujo último período de quota já terminou (ou seja, já passou a data de fim desse período).
+</Step>
+<Step>
+Para cada uma dessas filiações, o sistema avança mês a mês — a partir do dia seguinte ao fim do último período — e cria um novo período de quota para cada mês que **já tenha começado** na hora local do clube. Nunca cria um período para um mês que ainda não começou.
+</Step>
+<Step>
+Cada período novo vai do dia 1 às 00:00 até ao último dia do mês às 23:59:59, em hora local do clube.
+</Step>
+<Step>
+O valor da quota é recalculado nesse momento: o sistema vai buscar o preço da quota base **atual** do clube e aplica o desconto da **classe de sócio atual** desse sócio. Não usa o preço do mês anterior.
+</Step>
+</Steps>
+
+<Callout title="Nos bastidores">
+Este job é o mesmo que também gera, dez minutos mais tarde, os períodos de mensalidade dos atletas (00:10). É por isso que, ao mesmo tempo que aparecem quotas novas de sócios, também podem aparecer novas mensalidades de atletas. Ver [Mensalidades de atleta](/docs/sistema/mensalidades-de-atleta) para o mecanismo equivalente do lado dos atletas.
+</Callout>
+
+### O que o operador vê
+
+Na ficha do sócio, separador **Filiação e Quotas**, aparece uma linha nova na tabela de quotas mensais assim que o mês seguinte começa — com o estado **Em dívida**. Não há nenhuma notificação, badge ou aviso no BackOffice a assinalar que isto aconteceu: a única forma de o ver é abrir a ficha do sócio.
+
+![Ficha de um sócio mostrando o separador de Filiação e Quotas com o histórico de quotas mensais](/images/guide/socios/ficha-filiacao-quotas.png)
+
+Um ponto a reter para o dia a dia da secretaria: a lista de quotas de um sócio **nunca está "completa" num sentido absoluto** — só contém os períodos já gerados até àquele momento. Se for preciso saber quanto um sócio vai dever num mês que ainda não começou, essa informação simplesmente não existe ainda, por desenho — os períodos nunca são criados com antecedência.
+
+## Preço e desconto: sempre calculados no momento da criação
+
+O valor de cada quota nova é recalculado no preciso momento em que o período é gerado — nunca é copiado do mês anterior. Isto tem duas consequências práticas:
+
+- Se o clube alterar o preço base da quota em **Administração → Configurações → Cobranças**, essa alteração só se reflete nas quotas que ainda vão nascer. As quotas já geradas (mesmo que ainda não pagas) mantêm o valor antigo.
+- Se a classe de um sócio mudar (manualmente ou pelo job noturno de [classes por idade](/docs/sistema/classes-por-idade)), o novo desconto só se aplica à próxima quota gerada. Os períodos já existentes nunca são reajustados.
+
+<Callout title="Nos bastidores">
+Não existe proração por dia. Se um sócio se inscrever a 6 de março, o primeiro período de quota cobre o mês inteiro (1 a 31 de março) e é cobrado ao valor mensal completo, não a uma fração proporcional aos dias restantes.
+</Callout>
+
+## Sócios com desconto de 100% ("Isento")
+
+Se, no momento de gerar o período, o valor calculado for exatamente 0 € (uma classe totalmente isenta), o sistema não deixa a quota como "em dívida" — cria automaticamente um pagamento já **Concluído**, com **Iniciado por: Sistema**, para que o período apareça de imediato como pago. Isto é normal e esperado: um sócio isento vai mostrar, todos os meses, uma nova linha já com estado **Pago**, atribuída ao sistema em vez de a um operador. Ver [Notificações automáticas](/docs/sistema/notificacoes-automaticas) para mais sobre o que significa "Iniciado por: Sistema" no histórico de pagamentos.
+
+## Sócios novos: a primeira quota nasce no pagamento, não no job noturno
+
+Uma filiação **acabada de criar** não é tocada por este job diário — o job só estende filiações que já têm pelo menos um período de quota. A primeira quota de um sócio novo é criada de imediato e de forma síncrona no momento em que o primeiro pagamento é registado (seja através de **Registar Pagamento Inicial** na ficha do sócio, seja através do primeiro pagamento feito pelo próprio sócio na aplicação). É também nesse mesmo momento que o sócio recebe o seu **número de sócio**.
+
+Por isso, imediatamente a seguir a criar um sócio novo, a secção de pagamentos aparece vazia — isto não é um erro, é o comportamento esperado até haver um primeiro pagamento registado.
+
+## O Estado da Filiação pode mudar "sozinho"
+
+O chip de estado no topo da ficha do sócio (ex.: **Ativo**, **Em dívida**, **Sem Filiação**) não é um valor guardado que precise de ser atualizado por um job — é **sempre calculado no momento em que a ficha é aberta**, a partir de quais períodos estão em dívida. Por isso pode "mudar sozinho" entre duas visitas à mesma ficha, sem que ninguém tenha feito nada de especial:
+
+- Se o job das 00:00 gerar uma nova quota em dívida para um sócio que estava **Ativo**, o estado passa a **Em dívida** na próxima vez que a ficha for aberta.
+- Se um pagamento pendente (Multibanco/MB Way) for confirmado pela [reconciliação automática](/docs/sistema/notificacoes-automaticas) a correr de 5 em 5 minutos, o estado pode voltar a **Ativo** sem que um operador tenha registado nada.
+
+Existe também um job diário às 01:00 (UTC) chamado "verificação de expiração de filiações" — mas, tal como está implementado atualmente, este job **não faz nada visível**: o estado é sempre derivado em tempo real, por isso não há um lote de filiações a "expirar" em massa. Mantemos esta linha na tabela de jobs por completude, mas não é preciso explicar este job a um sócio ou colega — é invisível por desenho.
+
+## Perguntas frequentes
+
+<Accordions>
+<Accordion title="Porque apareceu uma quota nova no dia 1?">
+Porque o job diário que corre à meia-noite (UTC) verificou que o período anterior desse sócio já tinha terminado e gerou o período seguinte automaticamente. Não é preciso fazer nada para isto acontecer — acontece para todas as filiações ativas, todos os dias.
+</Accordion>
+<Accordion title="Porque está um sócio Em dívida se ninguém lhe mexeu?">
+Porque o estado da filiação é sempre recalculado a partir das quotas em dívida no momento em que a ficha é aberta. Se o job noturno gerou uma quota nova, ou se uma quota antiga continua por pagar, o sócio aparece Em dívida mesmo que a equipa do clube não tenha feito nenhuma alteração.
+</Accordion>
+<Accordion title="Se eu mudar o preço da quota hoje, os sócios com dívida antiga pagam o valor novo?">
+Não. Uma quota já gerada mantém o valor com que nasceu, mesmo que ainda esteja por pagar. O valor novo só se aplica a partir da próxima quota que o job noturno gerar.
+</Accordion>
+<Accordion title="Um sócio pode ter uma quota do próximo mês antes de esse mês começar?">
+Não, por desenho. O sistema nunca gera um período de quota para um mês que ainda não começou em hora local do clube, mesmo que o sócio já tenha pago meses em avanço através de um pagamento antecipado.
+</Accordion>
+</Accordions>
+
+Para o mecanismo equivalente do lado das classes etárias que definem o desconto aplicado a cada quota, ver [Classes por idade](/docs/sistema/classes-por-idade). Para o fluxo manual de registar, cobrar ou perdoar uma quota, ver [Quotas e Filiação](/docs/socios/quotas-e-filiacao).

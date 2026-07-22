@@ -1,0 +1,71 @@
+---
+title: Galeria do evento
+description: Como definir capacidade, imagem de capa e galeria de um evento no passo Detalhes Adicionais.
+---
+
+O passo **Detalhes Adicionais** do assistente de criação/edição de eventos (opcional para eventos normais, obrigatório de percorrer em jogos como último passo) é onde define a capacidade de inscrições, a imagem de capa e a galeria de fotos do evento.
+
+## Capacidade
+
+O campo **Capacidade** aceita um valor entre 0 e 100 000. Definir um valor superior a 0 ativa o botão de RSVP na aplicação do clube e limita o número de inscrições possíveis a esse valor. Deixe o campo a **0** para desativar o RSVP por completo.
+
+<Callout title="Nos bastidores">
+  O texto de ajuda deste campo fala em "ativar o RSVP", mas o RSVP é hoje considerado um mecanismo secundário: o modelo principal para saber quem esteve presente é o check-in por QR e a lista de presenças de cada ocorrência, não a contagem de inscrições RSVP. Trate o RSVP como uma estimativa de interesse, não como a lista definitiva de presenças.
+</Callout>
+
+## Imagem de capa
+
+O campo **Imagem de capa** aceita uma única imagem. Em estado vazio mostra uma caixa tracejada com "Nenhuma imagem de capa selecionada." e o botão **Escolher imagem de capa**. Depois de escolhida, a imagem aparece em miniatura com o nome do ficheiro, o tamanho (em KB) e um botão para remover.
+
+## Galeria do evento
+
+O campo **Galeria do evento** aceita várias imagens. Em estado vazio mostra o botão **Gerir imagens da galeria**. Com imagens já escolhidas, cada uma aparece como uma peça de 120×120: com um ícone para arrastar e reordenar, um botão para remover (X) e setas para reordenar sem arrastar. Pode reordenar tanto por arrastar-e-largar como clicando nas setas — a ordem que definir aqui é a ordem em que as imagens aparecem depois na aplicação e no site do clube.
+
+![Passo Detalhes Adicionais com os campos Capacidade, Imagem de capa e Galeria do evento](/images/guide/eventos/editar-detalhes-adicionais.png)
+
+<Callout title="Nos bastidores">
+  Ao editar um evento, a lista de imagens da galeria é sempre gravada por substituição completa, não por adição. Se remover todas as imagens do campo **Galeria do evento** antes de guardar, o evento fica sem nenhuma imagem de galeria — não é possível manter as antigas e adicionar só as novas sem as reintroduzir todas no seletor.
+</Callout>
+
+## Gerir imagens da galeria — o seletor
+
+Ao clicar em **Escolher imagem de capa** ou **Gerir imagens da galeria**, abre-se um seletor com duas áreas:
+
+<Tabs items={["Biblioteca de imagens", "Enviar imagens"]}>
+<Tab value="Biblioteca de imagens">
+
+Mostra uma grelha com as imagens já existentes na biblioteca do clube. Tem uma caixa de pesquisa por título/nome de ficheiro por cima da grelha, e paginação por baixo (9 imagens por página). Um contador mostra quantas imagens estão selecionadas ("N selecionada(s)"), com um botão **Limpar seleção atual**.
+
+Selecione uma ou várias imagens (clique para marcar/desmarcar) e confirme com **Usar selecionadas** — este botão só fica ativo depois de ter pelo menos uma imagem selecionada.
+
+Se a biblioteca ainda não tiver nenhuma imagem, o ecrã mostra "Ainda não existem imagens. Envie a primeira para começar." com um atalho direto para o separador de envio.
+
+</Tab>
+<Tab value="Enviar imagens">
+
+Uma zona de arrastar-e-largar (ou clicar para escolher ficheiro do computador). Cada ficheiro enviado mostra o seu progresso individual, terminando num ícone de confirmação ou de erro. Assim que pelo menos um envio for bem-sucedido, aparece o botão **Continuar para a biblioteca**, que o leva de volta ao separador de biblioteca com a imagem ou imagens já enviadas pré-selecionadas.
+
+</Tab>
+</Tabs>
+
+![Seletor de imagens com os separadores Biblioteca de imagens e Enviar imagens](/images/guide/eventos/galeria-biblioteca.png)
+
+## Limites de upload
+
+- Formatos aceites: **jpg, jpeg, png, webp**.
+- Tamanho máximo por ficheiro: **5 MB**. Um ficheiro maior é rejeitado assim que tenta enviá-lo, mesmo que o seletor de ficheiros do seu sistema operativo o tenha deixado escolher.
+- Um ficheiro sem extensão reconhecida é recusado antes mesmo de tentar o envio.
+
+<Callout title="Nos bastidores">
+  As imagens enviadas não passam por nenhuma verificação automática de conteúdo impróprio nesta área (eventos e modalidades) — ao contrário, por exemplo, das fotos de perfil de sócio, que têm esse tipo de verificação. Reveja visualmente o que carrega para a galeria de um evento antes de o publicar.
+</Callout>
+
+## Onde ficam guardadas as imagens
+
+Todas as imagens da biblioteca de media ficam guardadas em armazenamento próprio do clube, isolado dos restantes clubes na plataforma. Ao listar ou consultar uma imagem, o sistema gera sempre um novo link de acesso válido por 24 horas — por isso nunca deve guardar ou partilhar diretamente o endereço de uma imagem da biblioteca, use sempre o ecrã do BackOffice para a consultar.
+
+## Onde as imagens aparecem
+
+Assim que guarda o evento com uma imagem de capa ou galeria associada, essa imagem fica imediatamente disponível na aplicação móvel e no site do clube — não existe um passo separado de "publicar imagens". A única condição é o próprio estado de visibilidade do evento: um evento em **Em Planeamento** não é visto por ninguém fora do backoffice, imagens incluídas (ver [Criar Novo Evento](/docs/eventos/criar-evento#estado-inicial-e-visibilidade)).
+
+Para voltar à vista geral do calendário e ao detalhe de um evento, veja [Eventos](/docs/eventos).

@@ -1,0 +1,61 @@
+---
+title: Eventos
+description: O calendário de jogos, treinos e outros eventos do clube — filtros, vista mensal/semanal e o detalhe de cada evento.
+---
+
+A página **Eventos** mostra o calendário do clube: jogos, treinos, reuniões, eventos sociais e tudo o resto que a secretaria agenda. É o ponto de partida para criar um evento novo, consultar o que está planeado e, num jogo, registar o resultado.
+
+## Filtros e vistas
+
+No topo da página encontra um filtro por tipo de evento, com a opção **Todos** e os restantes tipos configurados para o seu clube (por exemplo, **Jogo**, **Treino** ou **Reunião**). Use-o para isolar, por exemplo, só os jogos de uma época.
+
+A par do filtro, pode alternar entre **Vista Mensal** e **Vista Semanal**, consoante precise de uma visão geral do mês ou de detalhe de uma semana concreta.
+
+![Calendário de eventos com o filtro por tipo e a alternância entre vista mensal e semanal](/images/guide/eventos/calendario.png)
+
+<Callout title="Nos bastidores">
+  Um evento recorrente (por exemplo, um treino semanal) aparece no calendário como várias ocorrências com data própria, mas essas ocorrências não são todas criadas de uma vez quando o evento é gravado. Um processo periódico do sistema mantém sempre as ocorrências de hoje e de amanhã prontas para check-in; as ocorrências mais distantes no tempo só se materializam mais perto da data. Consulte [O sistema trabalha por si](/docs/sistema) para perceber como funcionam os processos automáticos do BackOffice em geral.
+</Callout>
+
+## O detalhe de um evento
+
+Ao clicar num evento do calendário abre o painel de detalhe, com:
+
+- O **estado** do evento (ver tabela abaixo).
+- Para jogos, o **resultado** (quando já existe).
+- O **local** do evento.
+- A **Galeria** de imagens associadas.
+- Os **Detalhes da Competição**, quando o evento é um jogo ligado a uma competição.
+- **RSVP e Capacidade**, com a leitura das entradas/inscrições já registadas quando o evento tem capacidade definida.
+
+![Painel de detalhe de um evento, com estado, local, galeria e capacidade](/images/guide/eventos/detalhe-evento.png)
+
+### Estados possíveis
+
+| Estado | O que significa |
+|---|---|
+| **Em Planeamento** | Estado manual. O evento existe mas ainda não é visível para os sócios/atletas — só o staff do backoffice o vê. |
+| **Agendado** | Estado automático, antes da data de início: o evento é visível e será apresentado como próximo. |
+| **Em Curso** | Estado automático, durante o intervalo entre início e fim do evento. |
+| **Concluído** | Estado automático, depois da hora de fim. |
+| **Cancelado** | Estado manual. |
+
+Nunca assuma o estado só pela cor do chip — confirme sempre o nome do estado no texto do painel.
+
+<Callout title="Nos bastidores">
+  Não existe um botão "Publicar" separado. Enquanto o estado estiver em **Em Planeamento**, o evento fica invisível para sócios e atletas; para o publicar, basta mudar o estado para **Automático** (ou para outro estado manual como **Cancelado**). Ver [Criar Novo Evento](/docs/eventos/criar-evento) para o aviso que aparece ao criar um evento que fica em Planeamento.
+</Callout>
+
+## Ações disponíveis num evento
+
+A partir do painel de detalhe, e consoante as suas permissões, tem acesso a:
+
+- **Editar** — abre o mesmo assistente usado na criação, com os dados já preenchidos.
+- **Duplicar Evento** — cria uma cópia do evento com um único clique, sem abrir nenhum diálogo. Depois de duplicar, abra a cópia para ajustar data e outros detalhes.
+- **Eliminar Evento** — pede confirmação. Se o evento for recorrente, é-lhe dada a escolha entre eliminar apenas aquela ocorrência ou desativar a recorrência (mantendo o histórico de ocorrências passadas).
+
+<Callout title="Nos bastidores">
+  Se tentar eliminar uma ocorrência (ou a série toda) que já tenha registos de presença ou check-in por QR, o sistema recusa o pedido para proteger esse histórico — só é avisado disto através da mensagem de erro depois de confirmar, o ecrã não bloqueia a ação antecipadamente.
+</Callout>
+
+Para criar um evento novo, veja [Criar Novo Evento](/docs/eventos/criar-evento). Para gerir imagens de capa e galeria, veja [Galeria do Evento](/docs/eventos/galeria-do-evento).

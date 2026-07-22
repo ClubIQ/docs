@@ -1,0 +1,46 @@
+---
+title: Modalidades
+description: Como criar e editar as modalidades desportivas do clube.
+---
+
+O separador **Modalidades** é o catálogo dos desportos que o clube pratica (ex.: Futebol, Natação, Basquetebol). Cada modalidade criada aqui fica disponível para lhe associar [Escalões](/docs/gestao-desportiva/escaloes) e, mais tarde, para a escolher em eventos do tipo Jogo e em inscrições de atletas.
+
+## Criar uma modalidade
+
+<Steps>
+<Step>
+Clique em **Adicionar Modalidade**.
+</Step>
+<Step>
+No campo **Desporto**, escolha o desporto na lista (Futebol, Basquetebol, Voleibol, Ténis, Natação, entre outros). Esta lista é um catálogo fixo da plataforma — não é texto livre. O nome e o ícone da modalidade são definidos automaticamente a partir do desporto escolhido; não há campo separado para o nome nem seletor de ícone.
+</Step>
+<Step>
+Preencha a **Descrição** (opcional).
+</Step>
+<Step>
+Se o seu clube tiver o módulo de website ativo, defina também a **Imagem de capa** e a **Galeria** — ver secção seguinte.
+</Step>
+<Step>
+Clique em **Criar modalidade**.
+</Step>
+</Steps>
+
+Não é possível criar duas modalidades com o mesmo desporto no mesmo clube — o sistema rejeita duplicados.
+
+![Lista de modalidades do clube com o desporto, descrição e ações de editar/eliminar](/images/guide/gestao-desportiva/modalidades.png)
+
+## Imagem de capa e galeria
+
+Os campos **Imagem de capa** e **Galeria** só aparecem se o módulo de website do clube estiver ativo. Servem para páginas da modalidade no website do clube — não são usados em mais nenhum sítio do BackOffice ou da aplicação.
+
+Para escolher as imagens, usa-se o mesmo seletor de biblioteca de imagens dos eventos: clique em **Escolher imagem de capa** (ou **Gerir imagens da galeria**) para abrir a biblioteca, onde pode selecionar imagens já existentes ou enviar novas. O funcionamento completo deste seletor — upload, formatos aceites, reordenar imagens da galeria — está descrito em [Galeria do evento](/docs/eventos/galeria-do-evento), incluindo os limites de tamanho e formato de ficheiro.
+
+![Formulário de edição de uma modalidade com desporto, descrição, imagem de capa e galeria](/images/guide/gestao-desportiva/editar-modalidade.png)
+
+<Callout title="Nos bastidores">
+As imagens de capa e de galeria são apenas associadas à modalidade — não é feito qualquer redimensionamento, geração de miniatura ou verificação automática de conteúdo impróprio no momento do envio. Ficam disponíveis de imediato assim que a modalidade é guardada, sem passo de "publicação" separado. Consulte [O sistema trabalha por si](/docs/sistema) para mais detalhes sobre o que acontece automaticamente nos bastidores.
+</Callout>
+
+## Eliminar uma modalidade
+
+Uma modalidade só pode ser eliminada se não tiver nenhum escalão associado. Se tentar eliminar uma modalidade com escalões, a ação é recusada. Elimine primeiro os escalões dessa modalidade (ver [Escalões](/docs/gestao-desportiva/escaloes)) e só depois a modalidade.

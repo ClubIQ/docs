@@ -1,0 +1,76 @@
+---
+title: Classes por idade
+description: O job noturno que atualiza a Classe de Sócio automaticamente quando alguém muda de escalão etário.
+---
+
+Quando um sócio faz anos e passa a encaixar noutro escalão etário, a **Classe de Sócio** dele muda sozinha, durante a noite — sem que ninguém precise de abrir a ficha e alterar o campo à mão. Esta página explica exatamente quem é abrangido, o que muda e o que não muda.
+
+## Quando corre
+
+Todos os dias às 23:55 (UTC), o sistema verifica quais os sócios que fazem anos no dia seguinte e atualiza a **Classe de Sócio** de quem precisa de mudar de escalão.
+
+<Callout title="Nos bastidores">
+O job usa o relógio do servidor (UTC) para calcular "amanhã", não o fuso horário do clube. Na prática, como corre às 23:55 UTC, a mudança de classe acontece pouco antes da meia-noite UTC — o que, para um clube em Portugal continental, pode ficar ligeiramente desfasado da meia-noite local consoante a época do ano (inverno ou verão). Para efeitos práticos do dia a dia isto raramente é notado, mas explica porque a mudança de classe nem sempre coincide exatamente com a meia-noite local do dia do aniversário.
+</Callout>
+
+## Quem é abrangido
+
+Só são avaliados sócios que já têm **uma classe atribuída** com idade mínima e/ou máxima definida (**Administração → Classes de Sócio**). Isto significa duas coisas importantes:
+
+- Um sócio **sem nenhuma classe atribuída** nunca é apanhado por este job, mesmo que o aniversário dele o devesse qualificar para uma classe pela primeira vez. A atribuição de classe por idade a um sócio sem classe só acontece noutros momentos (por exemplo, na criação do sócio).
+- Uma classe **sem limites de idade definidos** (nem mínima nem máxima) nunca dispara uma mudança — o sócio fica nessa classe indefinidamente por este mecanismo.
+
+## O que acontece, passo a passo
+
+<Steps>
+<Step>
+O sistema identifica os sócios cujo aniversário é "amanhã" (data do servidor) e que já têm uma classe atribuída com limite de idade.
+</Step>
+<Step>
+Calcula a nova idade de cada um desses sócios.
+</Step>
+<Step>
+Procura, entre as classes do clube, aquela cujo intervalo de idade (mínima–máxima) inclui a nova idade. Se houver mais do que uma classe cujo intervalo se sobrepõe, é escolhida a de idade mínima mais baixa — por isso vale a pena manter os intervalos de idade das classes do clube sem sobreposições, para evitar surpresas.
+</Step>
+<Step>
+Se existir uma classe correspondente, o campo **Classe de Sócio** da ficha é atualizado para essa classe. Se **não** existir nenhuma classe correspondente à nova idade, o campo é limpo — o sócio fica sem classe atribuída (o que equivale a pagar o preço cheio, sem desconto).
+</Step>
+</Steps>
+
+Cada sócio é processado de forma independente: se a atualização de um sócio falhar por alguma razão, isso não impede a atualização dos restantes nessa mesma noite.
+
+### O que muda
+
+- O campo **Classe de Sócio** na ficha do sócio (separador de dados pessoais/filiação) muda de imediato, durante a noite.
+- O efeito financeiro só aparece na **próxima quota gerada** pelo job de [quotas automáticas](/docs/sistema/quotas-automaticas) (00:00) — a nova classe passa a determinar o desconto aplicado a partir dessa quota em diante.
+
+### O que NÃO muda
+
+- **Quotas já geradas** (pagas ou por pagar) nunca são reajustadas com o novo desconto — mantêm o valor com que nasceram.
+- O interruptor de desconto de classe ativo (fora do âmbito deste job) — se um operador desativou manualmente o desconto de classe de um sócio, este job não volta a ativá-lo; só atualiza qual é a classe atribuída, não se o desconto dessa classe está ativo.
+- Classes **sem** idade mínima nem máxima definida nunca são alvo de mudança automática.
+- Sócios **sem classe atribuída** nunca ganham uma classe por este mecanismo — só perdem/trocam se já tiverem uma.
+
+<Callout title="Nos bastidores">
+Não há nenhuma entrada visível de auditoria específica para esta mudança na ficha do sócio — a alteração de classe por este job não gera uma linha "alterado por" no histórico do sócio, ao contrário de uma edição manual feita por um operador.
+</Callout>
+
+## Exemplo concreto
+
+Um sócio nasceu a 15 de junho de 2008. O clube tem duas classes: **Classe C** (dos 12 aos 17 anos) e **Classe B** (dos 18 aos 25 anos). Na noite de 14 para 15 de junho de 2026, o sócio faz 18 anos. Às 23:55 (UTC) de dia 14, o job identifica-o, calcula a nova idade (18), verifica que a **Classe B** é a que corresponde a essa idade, e atualiza o campo **Classe de Sócio** de Classe C para Classe B. Nessa noite não muda nenhum valor a pagar — só quando o job de quotas gerar o próximo período é que o desconto da Classe B passa a ser aplicado.
+
+## Perguntas frequentes
+
+<Accordions>
+<Accordion title="Porque é que a classe de um sócio mudou sem ninguém ter editado a ficha?">
+Porque o sócio fez anos e passou a encaixar noutro escalão de idade definido em Administração → Classes de Sócio. O job noturno das 23:55 atualiza automaticamente o campo Classe de Sócio nesses casos.
+</Accordion>
+<Accordion title="Um sócio novo, sem classe atribuída, é automaticamente colocado numa classe quando faz anos?">
+Não através deste job. Este job só atualiza sócios que já têm uma classe atribuída com limites de idade. Um sócio sem classe fica sem classe até alguém a atribuir manualmente ou até outro processo (como a criação do sócio) a definir.
+</Accordion>
+<Accordion title="Se eu mudar os limites de idade de uma classe hoje, os sócios são reavaliados imediatamente?">
+Não. A reavaliação só acontece na noite seguinte, no aniversário de cada sócio — mudar os limites de uma classe não dispara, por si só, uma passagem em lote de todos os sócios por essa classe.
+</Accordion>
+</Accordions>
+
+Para perceber o efeito financeiro completo de uma mudança de classe, ver [Quotas automáticas](/docs/sistema/quotas-automaticas). Para gerir as classes de sócio do clube, ver [Administração](/docs/administracao).

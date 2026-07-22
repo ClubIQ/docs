@@ -1,0 +1,41 @@
+---
+title: Competições
+description: Como criar e gerir competições — ligas, taças, torneios e particulares.
+---
+
+O separador **Competições** reúne as ligas, taças, torneios e particulares em que o clube participa. Uma competição liga sempre uma [modalidade](/docs/gestao-desportiva/modalidades), um [escalão](/docs/gestao-desportiva/escaloes) e uma [época](/docs/gestao-desportiva/epocas) — e é a competição que os jogos (eventos do tipo **Jogo**) podem referenciar ao serem criados.
+
+## Criar uma competição
+
+<Steps>
+<Step>
+Inicie a criação de uma nova competição a partir do separador **Competições**.
+</Step>
+<Step>
+Indique o tipo de competição (por exemplo, liga, taça, torneio ou particular).
+</Step>
+<Step>
+Associe a **Modalidade**, o **Escalão** e a **Época** a que esta competição pertence. Só é possível escolher combinações de modalidade e escalão que existam na época selecionada.
+</Step>
+<Step>
+Guarde a competição.
+</Step>
+</Steps>
+
+![Lista de competições com tipo, modalidade, escalão, época e estado](/images/guide/gestao-desportiva/competicoes.png)
+
+## Ligação com os jogos
+
+Ao criar um evento do tipo **Jogo**, o campo **Competição** permite escolher uma competição já existente entre as que ainda estão em aberto (as já fechadas deixam de aparecer na lista). Este campo é opcional.
+
+<Callout title="Nos bastidores">
+Se for escrito no campo **Competição** de um jogo um nome que não corresponde a nenhuma competição existente, o sistema cria automaticamente uma nova competição em estado de rascunho e associa-a a esse jogo — sem qualquer confirmação extra no ecrã. Vale a pena confirmar a lista de competições depois de criar jogos com nomes novos, para evitar competições em rascunho criadas por engano (por exemplo, devido a um pequeno erro de escrita no nome). Consulte [Criar evento](/docs/eventos/criar-evento) para o fluxo completo de criação de um jogo.
+</Callout>
+
+## Estados
+
+Uma competição avança pelos seus estados normais de utilização até poder ser fechada. Depois de fechada, deixa de estar disponível para seleção no campo **Competição** ao criar novos jogos.
+
+## Eliminar/gerir
+
+Consulte sempre as dependências antes de remover uma competição: como liga modalidade, escalão e época, e pode ter jogos associados, siga a mesma lógica de arrumação recomendada para [Escalões](/docs/gestao-desportiva/escaloes) e [Épocas](/docs/gestao-desportiva/epocas) — trate primeiro os jogos associados, só depois a competição.

@@ -1,0 +1,46 @@
+---
+title: Criar sócio
+description: Como completar o assistente de criação de um sócio, passo a passo.
+---
+
+Este ecrã cria um novo registo de sócio e, quando é fornecido um email, também cria a conta ligada
+na aplicação móvel. Use-o quando alguém entra para o clube pela primeira vez através do
+BackOffice.
+
+A partir de [Sócios](/docs/socios), clique em **Adicionar** para abrir o assistente **Criar sócio**. O assistente tem
+três passos e valida cada um antes de permitir avançar.
+
+<WarningCallout title="Expectativa de email">
+A interface sugere que será enviada uma palavra-passe por email. Na prática, o sistema cria a conta
+sem palavra-passe definida e envia uma mensagem a indicar ao novo utilizador que use **Esqueci-me da palavra-passe**
+dentro da aplicação móvel.
+</WarningCallout>
+
+<Steps>
+<Step>
+**Dados pessoais**. Introduza nome completo, email, telefone, data de nascimento e sexo opcional.
+</Step>
+<Step>
+**Identidade e morada**. Introduza número de identificação, número de contribuinte, validade do documento opcional,
+profissão, rua, cidade, código postal e país.
+</Step>
+<Step>
+**Filiação e primeiro pagamento**. Escolha a classe de sócio automática ou explícita, decida se deve aplicar o
+desconto de classe e, opcionalmente, registe o primeiro pagamento imediatamente.
+</Step>
+</Steps>
+
+![Passo 3 do assistente de criação de sócio, com seleção da classe e controlo do primeiro pagamento](/images/guide/socios/adicionar-passo3.png)
+
+## Comportamento importante
+
+- Se existir um email, é criada automaticamente uma conta de app
+- A atribuição automática de classe usa a idade do sócio no momento da criação
+- Não é criada nenhuma quota apenas por criar o registo de sócio
+- O registo do primeiro pagamento é independente da criação do sócio, por isso o sócio pode existir mesmo que a chamada de pagamento falhe
+
+<InfoCallout title="Comportamento relacionado do sistema">
+Para entender quando os próximos períodos de quota são gerados automaticamente, consulte
+[Quotas automáticas](/docs/sistema/quotas-automaticas) e
+[Classes por idade](/docs/sistema/classes-por-idade).
+</InfoCallout>

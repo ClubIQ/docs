@@ -1,0 +1,61 @@
+---
+title: Notificações de regularização
+description: Como funcionam os lembretes automáticos de regularização e onde os configurar na interface atual.
+---
+
+Os **lembretes de regularização** definem quando o sistema envia, sozinho, emails a lembrar sócios com valores por
+regularizar. A configuração é feita uma vez e, a partir daí, o processo corre automaticamente segundo as regras que o
+clube definiu.
+
+Esta configuração só é visível a quem pode atualizar a área de **Comunicações**.
+
+## Onde configurar
+
+Menu **Comunicações** → separador **Definições** → cartão **Lembretes de regularização**.
+
+<Callout title="Mudança recente de localização">
+Se alguém lhe disser para abrir **Pagamentos → Notificações**, está a referir-se a uma localização antiga deste
+ajuste. A interface atual mostra-o em [Comunicações → Definições](/docs/comunicacoes/definicoes).
+</Callout>
+
+## Campo a campo
+
+<Steps>
+<Step>
+**Ativar emails de regularização** — interruptor principal. Enquanto estiver desligado, nenhum email de regularização é enviado, independentemente dos restantes campos. Por definição, vem desligado num clube novo.
+</Step>
+<Step>
+**Primeira notificação após** — número de dias, a contar do momento em que o sócio fica com valores em dívida, até ser enviado o primeiro email de regularização.
+</Step>
+<Step>
+**Relembrar a cada** — número de dias entre lembretes seguintes, enquanto a dívida se mantiver.
+</Step>
+<Step>
+**Número máximo de emails por membro** — limite total de emails de regularização enviados a cada sócio. Deixe em branco para não ter limite.
+</Step>
+<Step>
+**Hora de envio** — hora do dia (formato HH:mm) a que os emails são disparados. Este campo usa sempre a **hora local do clube** — a página mostra o fuso horário configurado do clube junto ao campo, como referência.
+</Step>
+<Step>
+Clique em **Guardar configuração** para aplicar.
+</Step>
+</Steps>
+
+## Como funciona o envio, na prática
+
+- O sistema verifica, sócio a sócio, se a situação de dívida já dura há pelo menos o número de dias definido em **Primeira notificação após**. Só a partir daí é enviado o primeiro email.
+- Depois do primeiro envio, um sócio só volta a receber outro email de regularização se já tiverem passado os dias definidos em **Relembrar a cada** desde o último envio.
+- Se definir um número em **Número máximo de emails por membro**, assim que esse limite for atingido, o sócio deixa de receber novos lembretes — mesmo que continue em dívida.
+- O envio para de acontecer automaticamente assim que a dívida do sócio for regularizada (paga ou perdoada) — deixa de haver situação elegível para lembrar.
+- Além do email, se pelo menos uma das dívidas em causa for uma quota mensal (e não apenas taxas pontuais), o sócio também recebe uma notificação push na aplicação móvel, indicando quantas quotas e o valor total em dívida.
+- Esta configuração não tem um botão de "enviar agora" — só permite afinar o calendário. Não existe forma de disparar manualmente um envio único a partir daqui.
+
+<Callout title="Nos bastidores">
+Este é um dos poucos ecrãs do BackOffice onde a interface expõe diretamente a configuração de um job automático do sistema. Ao gravar aqui, está a alterar o horário de um processo que corre sozinho todos os dias, e que decide, sócio a sócio, se já é altura de enviar (ou repetir) um lembrete de regularização — sem que a secretaria precise de fazer nada. Para perceber a mecânica completa deste e de outros processos automáticos do clube, consulte [Notificações automáticas](/docs/sistema/notificacoes-automaticas).
+</Callout>
+
+## Ver também
+
+- [Comunicações — Definições](/docs/comunicacoes/definicoes) para a localização atual do cartão e dos limites de envio.
+- [Pagamentos — Histórico e estados](/docs/pagamentos) para consultar se um pagamento já regularizou a dívida de um sócio.
+- [Quotas e filiação](/docs/socios/quotas-e-filiacao) para pagar ou perdoar quotas manualmente, sem esperar pelo email automático.

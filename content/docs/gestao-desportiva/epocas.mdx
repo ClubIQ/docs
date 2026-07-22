@@ -1,0 +1,60 @@
+---
+title: Épocas
+description: Como criar e editar épocas desportivas e associar-lhes escalões.
+---
+
+O separador **Épocas** define os períodos desportivos do clube (ex.: "2025/2026"). Cada época tem uma data de início e uma data de fim, e é a ela que se associam os [escalões](/docs/gestao-desportiva/escaloes) que vão estar ativos nesse período — determinando quais os escalões disponíveis para inscrições e para [competições](/docs/gestao-desportiva/competicoes) enquanto essa época decorre.
+
+## Adicionar Época
+
+<Steps>
+<Step>
+Clique em **Adicionar Época**.
+</Step>
+<Step>
+Preencha o **Nome** (ex.: "2025/2026").
+</Step>
+<Step>
+Defina a **Data de Início** e a **Data de Fim**. A data de fim tem de ser posterior à data de início.
+</Step>
+<Step>
+Associe os escalões que vão estar ativos nesta época: expanda cada modalidade e marque os escalões pretendidos. Este passo é opcional — pode criar a época sem qualquer escalão associado e associá-los mais tarde.
+</Step>
+<Step>
+Clique em guardar para criar a época.
+</Step>
+</Steps>
+
+![Lista de épocas com nome, datas e estado](/images/guide/gestao-desportiva/epocas.png)
+
+Não é possível criar uma época cujas datas se sobreponham a outra época já existente do clube — a criação é recusada nesse caso.
+
+## O estado da época
+
+O estado de uma época **não se define manualmente** — não existe um botão "ativar época". O estado é calculado automaticamente a partir das datas:
+
+| Estado | Quando se aplica |
+|---|---|
+| **Planeada** | A data de início ainda não chegou. |
+| **Ativa** | A data atual está dentro do intervalo início–fim. |
+| **Concluída** | A data de fim já passou. |
+
+Só pode existir **uma época Ativa por clube** de cada vez. Se tentar criar ou editar uma época de forma a que fique Ativa enquanto já existe outra Ativa, a operação é recusada.
+
+## Editar uma Época
+
+Ao editar uma época, abre-se o mesmo formulário de criação, com a data de início e a data de fim lado a lado. Para associar ou remover escalões, expanda a modalidade pretendida na lista e marque ou desmarque os escalões — cada modalidade mostra quantos dos seus escalões já estão selecionados e as idades de cada um.
+
+![Modal de edição de uma época com datas e seleção de escalões por modalidade](/images/guide/gestao-desportiva/epocas.png)
+
+## Impacto em inscrições e competições
+
+<Callout title="Nos bastidores">
+As datas e associações de uma época têm efeito direto nas inscrições e nas competições: um atleta só pode ser inscrito num escalão que esteja associado à época em curso, e uma [competição](/docs/gestao-desportiva/competicoes) só pode ligar-se a combinações de modalidade e escalão que existam na época escolhida. Alterar as associações de escalões de uma época em curso pode por isso condicionar novas inscrições e novas competições — mas não afeta inscrições já feitas em meses anteriores, que mantêm o valor com que foram geradas.
+</Callout>
+
+Enquanto um escalão está associado à época, a **Mensalidade atleta** desse escalão determina a mensalidade cobrada aos atletas inscritos nessa combinação escalão/época — ver [Mensalidades de atleta](/docs/atletas/mensalidades). Uma época **Concluída** fica congelada: os preços associados a ela deixam de ser alterados mesmo que o preço do escalão mude entretanto.
+
+## Eliminar uma Época
+
+Não é possível eliminar a época **Ativa** — é preciso esperar que termine naturalmente (fica Concluída) ou eliminá-la antes de chegar a essa data. Uma época com escalões associados, ou com eventos/jogos associados, também não pode ser eliminada: remova primeiro essas associações.

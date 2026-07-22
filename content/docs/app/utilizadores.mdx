@@ -1,0 +1,93 @@
+---
+title: Utilizadores da app
+description: Gerir as contas de acesso à aplicação móvel e associá-las aos sócios correspondentes.
+---
+
+A página **Utilizadores da App** (menu **App → Utilizadores**) mostra as contas de acesso à aplicação móvel do clube — login por email, Google, Apple ou palavra-passe. Uma conta de utilizador é uma coisa diferente do registo de sócio: o sócio é a ficha administrativa (identidade, morada, NIF, estado de quotas); o utilizador é a credencial de login na app. Use esta página quando precisar de ativar, desativar ou associar uma conta de app a um sócio.
+
+## A lista de utilizadores
+
+A tabela mostra, por cada conta:
+
+| Coluna | O que indica |
+|---|---|
+| **Nº Sócio** | O número de sócio já associado a esta conta, se existir |
+| **Email** | O email de login da conta |
+| **Método de Login** | Como o utilizador entra na app (email, Google, Apple, palavra-passe) |
+| **Estado** | **Ativo** ou **Desativado** |
+| **Completou o Perfil** | Ícone de visto/cruz — se o utilizador já preencheu os dados de perfil na app |
+| **Último Login** | Data do último acesso à app |
+
+![Lista de utilizadores da app com colunas de nº de sócio, email, método de login, estado e último login](/images/guide/app/utilizadores.png)
+
+## Ativar e desativar uma conta
+
+Use esta ação para bloquear temporariamente o acesso de alguém à app — por exemplo, em caso de suspeita de utilização indevida — sem apagar nada.
+
+<Steps>
+<Step>
+Localize a linha do utilizador na lista.
+</Step>
+<Step>
+Clique na ação de alternar estado na linha correspondente.
+</Step>
+<Step>
+Confirme. O estado muda para **Desativado** (ou **Ativo**, se estava a reverter).
+</Step>
+</Steps>
+
+Um utilizador com o estado **Desativado** deixa de conseguir iniciar sessão na app, mas a conta e os dados associados mantêm-se.
+
+## Associar um utilizador a um sócio
+
+Este é o fluxo para ligar uma conta de app (login) ao registo de sócio correto na base de dados do clube. É necessário sempre que alguém se regista sozinho na app (com o próprio email) e a secretaria precisa de fazer corresponder essa conta ao seu número de sócio.
+
+A ação **Associar Sócio** só está disponível em linhas onde a coluna **Nº Sócio** está vazia. Se o utilizador já tiver um número de sócio associado, esta ação não aparece disponível nessa linha — não há, atualmente, uma forma de reatribuir uma conta já associada a partir desta página.
+
+<Steps>
+<Step>
+Na linha do utilizador a associar, clique no ícone de associação (**Associar Sócio**).
+</Step>
+<Step>
+No diálogo **Associar Utilizador a Sócio**, confirme o email do utilizador (mostrado só para leitura).
+</Step>
+<Step>
+Introduza o **Número de Sócio** a associar. Enquanto escreve, aparece uma pré-visualização com o nome, número, email e telefone do sócio correspondente — confirme que é a pessoa certa antes de continuar.
+</Step>
+<Step>
+Clique em **Confirmar**.
+</Step>
+</Steps>
+
+![Diálogo de associação entre um utilizador da app e um sócio, com pré-visualização dos dados do sócio](/images/guide/app/associar-socio.png)
+
+### Quando o sócio já está associado a outra conta
+
+Se o número introduzido corresponder a um sócio já ligado a outro utilizador, o diálogo mostra o aviso **"Este sócio já está associado a outro utilizador."** Continuar exige uma permissão adicional de reatribuição; sem ela, o botão **Confirmar** fica desativado e aparece a indicação de que a conta não tem permissão para associar sócios nesse caso.
+
+### O diálogo de resolução de conflitos
+
+Quando o utilizador já tinha o seu próprio registo de sócio com dados preenchidos (por exemplo, porque se auto-registou na app e completou o perfil antes de a secretaria fazer a associação oficial), o sistema compara os dois conjuntos de dados — os do utilizador e os do sócio de destino — campo a campo: nome completo, número de identificação, data de nascimento, telefone, NIF, morada (rua, cidade, distrito, código postal, país), profissão e sexo.
+
+- Onde os dois lados coincidem, ou um dos lados está em branco, o campo é **resolvido automaticamente** e aparece recolhido na secção **"Campos resolvidos automaticamente"**.
+- Onde os dois lados têm valores diferentes, o campo aparece em **"Campos em conflito — escolha o valor a manter"**, com dois cartões clicáveis por campo: **Do utilizador** e **Do sócio**. É necessário escolher um valor para cada campo em conflito.
+- Se não houver nenhum conflito, aparece uma mensagem verde a confirmar que tudo foi resolvido automaticamente.
+
+Depois de resolver todos os conflitos, clique em **Confirmar união**. Se preferir não reconciliar os dados campo a campo, pode clicar em **Ignorar** — o registo do sócio de destino mantém-se tal como estava, sem aplicar nenhum dos valores "Do utilizador".
+
+<Callout type="warn" title="Verifique os dados antes de confirmar">
+No momento em que se clica em **Confirmar** no primeiro diálogo, o registo de sócio antigo que o utilizador tinha criado sozinho (sem número de sócio) é **eliminado de forma definitiva** — antes mesmo de ver o diálogo de resolução de conflitos. Escolher **Ignorar** no ecrã de conflitos não recupera esse registo: só descarta a reconciliação campo a campo, não desfaz a eliminação, que já aconteceu. Reveja com atenção a pré-visualização do sócio no primeiro passo antes de confirmar — não há forma de reverter esta ação depois de confirmada.
+</Callout>
+
+### Quando a associação é bloqueada
+
+Se a conta que se está a tentar associar já tiver o seu próprio registo de sócio **com número de sócio atribuído** (ou seja, já é uma associação real, com pagamentos e histórico), a operação é recusada. Isto acontece porque associar essa conta a outro sócio implicaria perder um histórico de pagamentos já existente — o sistema protege esse registo e não permite a substituição por esta via.
+
+<Callout title="Nos bastidores">
+A atribuição do número de sócio só acontece no momento do primeiro pagamento registado — por isso um sócio recém-criado ainda não tem número. É precisamente por esse motivo que a associação de um utilizador a um sócio sem número ainda é permitida (o registo pode ser substituído), mas deixa de o ser assim que esse sócio já tem número e pagamentos associados. Consulte [Quotas e filiação](/docs/socios/quotas-e-filiacao) para perceber como e quando um sócio recebe o seu número.
+</Callout>
+
+## Ligações relacionadas
+
+- [Sócios](/docs/socios) — a ficha administrativa que estas contas de app se associam.
+- [Quotas e filiação](/docs/socios/quotas-e-filiacao) — como e quando um sócio recebe número.

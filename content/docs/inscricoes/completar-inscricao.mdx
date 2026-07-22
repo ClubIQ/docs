@@ -1,0 +1,26 @@
+---
+title: Completar inscrição
+description: Pedido seguro de dados adicionais do jogador através de um link específico em `/signup/complete/:token`.
+---
+
+O fluxo de **completar inscrição** é usado quando o clube precisa de recolher dados adicionais de um jogador já depois
+do pedido inicial. O acesso faz-se por um link específico, com token, enviado à pessoa certa.
+
+## O que costuma ser pedido aqui
+
+- fotografia do jogador;
+- identificação;
+- contactos;
+- morada;
+- contacto de emergência.
+
+## Características do fluxo
+
+- o link pode expirar ou deixar de ser válido;
+- o formulário valida foto, telemóvel, NIF e código postal;
+- se os dados já tiverem sido enviados antes, o formulário pode reabrir em modo de atualização.
+
+## Ver também
+
+- [Inscrição pública](/docs/inscricoes/inscricao-publica)
+

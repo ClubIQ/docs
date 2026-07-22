@@ -1,0 +1,12 @@
+{
+  "title": "Inscrições",
+  "pages": [
+    "index",
+    "caixa-de-entrada",
+    "pedidos-descartados",
+    "configuracoes",
+    "inscricao-publica",
+    "completar-inscricao",
+    "inscricao-de-socio"
+  ]
+}

@@ -1,0 +1,69 @@
+---
+title: Classes de Sócio
+description: Configurar os escalões etários e os descontos que determinam o valor da quota de cada associado.
+---
+
+O separador **Classes de Sócio**, em Administração → Configurações, define os escalões etários utilizados para calcular o valor da quota de cada associado. Cada classe possui um intervalo de idades e uma percentagem de desconto (causando isenção total ou parcial) sobre a quota-base. Utilize este ecrã quando o clube alterar a sua política de preços por idade ou quando necessitar de criar uma nova classe (por exemplo, "Sénior" ou "Estudante").
+
+![Tabela de Classes de Sócio com nome, intervalo de idade e desconto](/images/guide/administracao/classes-de-socio.png)
+
+## A tabela de classes
+
+A tabela lista as classes configuradas para o clube, com as colunas **Nome**, **Intervalo de Idade** e **Desconto**. Uma configuração de exemplo, tipicamente utilizada por um clube desportivo, é a seguinte:
+
+| Classe | Intervalo de idade | Desconto |
+|---|---|---|
+| Atleta / Isento | — | Isento |
+| Classe A | 66 – 200 anos | 50% de Desconto |
+| Classe B | 18 – 65 anos | Sem Desconto |
+| Classe C | 12 – 18 anos | Sem Desconto |
+| Classe D | 0 – 11 anos | 50% de Desconto |
+| Classe Mérito | — | Isento |
+
+A coluna **Desconto** apresenta sempre um destes três textos, nunca apenas um número:
+
+- **Não Aplicável** — a classe não possui um desconto configurado.
+- **«X»% de Desconto** — desconto parcial ativo (ex.: "50% de Desconto").
+- **Isento** — desconto de 100%, os elementos da classe não pagam quota.
+
+Quando uma classe não tem idade mínima, a linha apresenta "Sem limite de idade" nesse limite do intervalo; aplica-se o mesmo procedimento para a idade máxima.
+
+## Adicionar uma classe de sócio
+
+<Steps>
+<Step>
+Clique em **Adicionar Classe de Sócio**, no canto superior do separador.
+</Step>
+<Step>
+Preencha o campo **Nome** (ex.: "Estudante", "Sénior", "Adulto").
+</Step>
+<Step>
+Defina a **Idade Mínima** e a **Idade Máxima**. Deixe qualquer um dos campos em branco se não pretender estipular um limite nesse extremo do intervalo — por exemplo, uma classe "Sénior" pode ter apenas a idade mínima preenchida.
+</Step>
+<Step>
+Defina o **Desconto**, correspondente a uma percentagem entre 0 e 100. O ecrã apresenta em tempo real a **Quota Mensal Base**, a **Quota Mensal Efetiva** (com o desconto já aplicado) e o **Pagamento Mínimo** permitido — o desconto não pode reduzir a quota mensal para um valor inferior a esse mínimo.
+</Step>
+<Step>
+Para uma classe totalmente gratuita, selecione **Classe gratuita (sem pagamento)** em vez de definir o desconto a 100%.
+</Step>
+<Step>
+Clique em **Criar Classe de Sócio** para confirmar.
+</Step>
+</Steps>
+
+## O que cada campo controla
+
+- **Idade Mínima / Idade Máxima** — definem o intervalo de idades que qualifica um associado para esta classe. O sistema utiliza estes limites para atribuir e atualizar a classe automaticamente (ver a nota abaixo).
+- **Desconto** — a percentagem de redução aplicada sobre a quota mensal base do clube. É este valor que determina a quantia que o associado efetivamente paga: uma quota-base de 30 € com uma classe de 50% de desconto resulta numa quota mensal efetiva de 15 €.
+
+<Callout title="Nota prática">
+O valor da quota de um associado altera-se sempre que a sua classe é modificada — quer por intervenção manual de um dirigente na ficha do associado, quer por atualização automática do sistema com base na idade. Consulte [Quotas e filiação](/docs/socios/quotas-e-filiacao) para compreender como esse valor é aplicado às quotas mensais.
+</Callout>
+
+## Editar ou eliminar uma classe
+
+Utilize os ícones de ação na linha da classe para **editar** (abre o mesmo formulário de criação, pré-preenchido) ou **eliminar**. A eliminação requer uma confirmação explícita — *"Tem a certeza de que deseja eliminar a classe de sócio '«nome»'? Esta ação não pode ser revertida."* — dado que não é possível anular o procedimento posteriormente.
+
+<Callout title="Nos bastidores" type="warn">
+Todos os dias, às 23:55, um processo automático (job) verifica quais os associados cujo aniversário ocorre no dia seguinte. Caso a nova idade mude para outro escalão, o sistema altera a classe do associado de forma autónoma — sem qualquer intervenção dos colaboradores. Isto apenas se aplica a classes com idade mínima ou máxima definida (uma classe sem ambos os limites nunca é atribuída por este processo) e afeta exclusivamente associados que já possuam uma classe atribuída. Se a nova idade não corresponder a nenhuma classe configurada, a classe do associado é removida e este passa a pagar o valor total, sem desconto. Consulte [Classes por idade](/docs/sistema/classes-por-idade) para obter os detalhes completos sobre este processo.
+</Callout>

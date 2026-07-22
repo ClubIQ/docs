@@ -1,0 +1,47 @@
+---
+title: IAM - Gestão de Identidade e Acesso
+description: Gerir as contas dos colegas que usam o BackOffice e os cargos que definem o que cada um pode ver e fazer.
+---
+
+**Administração - Gestão de Identidade e Acesso** (GIA, no menu lateral) é onde se gerem as contas de staff do BackOffice — não confundir com os utilizadores da aplicação móvel (esses ficam em App → Utilizadores). Use este ecrã para dar acesso a um novo colega, ajustar o que cada cargo pode ver, ou desativar a conta de alguém que saiu do clube.
+
+![Ecrã de GIA com os separadores Utilizadores e Cargos e Permissões](/images/guide/administracao/gia.png)
+
+Tem dois separadores: **Utilizadores** e **Cargos e Permissões**.
+
+## Separador Utilizadores
+
+Lista as contas de staff do BackOffice — as pessoas que fazem login para gerir o clube (secretaria, tesouraria, direção), cada uma associada a um cargo.
+
+### Adicionar Utilizador
+
+<Steps>
+<Step>
+No separador **Utilizadores**, clique em **Adicionar Utilizador**.
+</Step>
+<Step>
+Preencha os dados de identificação do colega (nome, email).
+</Step>
+<Step>
+Atribua um **cargo** — é o cargo que decide o que esta pessoa vai conseguir ver e fazer no BackOffice.
+</Step>
+<Step>
+Confirme para criar a conta.
+</Step>
+</Steps>
+
+A partir daqui também pode **editar** ou **eliminar** uma conta de staff existente.
+
+## Separador Cargos e Permissões
+
+Cada **cargo** é um conjunto de permissões — uma matriz de checkboxes que decide, módulo a módulo, o que os colegas com esse cargo podem ver e fazer (por exemplo, ver sócios mas não editar pagamentos; ou ver e editar cobranças mas não eliminar sócios).
+
+<Callout title="Porque é que um colega não vê certos menus">
+Se um colega inicia sessão e não vê um separador ou botão que esperava (ex.: não consegue "Pagar" uma quota, ou não vê o menu Administração), o motivo está quase sempre aqui: o cargo atribuído a essa conta não tem a permissão correspondente. Reveja o cargo em **Cargos e Permissões** antes de assumir que é um problema técnico — consulte também os avisos de permissões em [Primeiros passos](/docs/primeiros-passos).
+</Callout>
+
+Ações disponíveis: criar um novo cargo, editar as permissões de um cargo existente através da matriz de permissões, ou eliminar um cargo que já não é necessário.
+
+## Ver também
+
+- [Primeiros passos](/docs/primeiros-passos) — para perceber como as permissões afetam o que cada colega vê ao entrar no BackOffice.

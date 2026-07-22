@@ -1,0 +1,58 @@
+---
+title: Atletas
+description: A lista de atletas do clube — quem está inscrito em cada modalidade, o seu vínculo a um sócio e o estado de pagamento.
+---
+
+O módulo **Atletas** reúne todas as pessoas inscritas numa modalidade desportiva do clube, independentemente de serem também sócios. Um atleta pode existir de forma independente ou estar associado a um sócio já existente — os dois registos partilham a mesma identidade, mas representam papéis diferentes: **Sócio** é o vínculo associativo/CRM do clube; **Atleta** é a inscrição numa modalidade com o seu próprio plano de cobrança. Use este ecrã para encontrar um atleta, criar um novo, ligar um atleta a um sócio existente ou importar vários de uma vez.
+
+## A lista de atletas
+
+A tabela mostra, por cada atleta: **Nome completo**, **Email**, **Sócio** (o número do sócio associado, ou o texto **Atleta independente** quando não há vínculo), **Modalidades ativas** (em chips) e o **Estado** de pagamento, além da data de criação.
+
+Quando um atleta está associado a um sócio, a coluna **Sócio** mostra o número do sócio (por exemplo **#128**) em vez do texto **Atleta independente**. Este número é um atalho — clicar no atleta leva sempre à ficha do atleta, nunca diretamente à ficha do sócio.
+
+![Lista de atletas com colunas de nome, sócio associado, modalidades ativas e estado de pagamento](/images/guide/atletas/lista.png)
+
+### Estados de pagamento
+
+O chip **Estado** resume a situação de cobrança do atleta face às mensalidades da modalidade. Não confie apenas na cor do chip — o texto identifica sempre o estado:
+
+| Estado | Significado |
+|---|---|
+| **Em dívida** | Há pelo menos um mês de mensalidade vencido e por pagar (o mês já terminou sem pagamento). |
+| **Por pagar** | Há um mês de mensalidade ainda não pago, mas que ainda não venceu (por exemplo, o mês corrente). |
+| **Sem dívida** | Não há mensalidades pendentes. |
+
+<Callout title="Nos bastidores">
+O estado de pagamento não é gravado numa coluna — é calculado a cada carregamento da página a partir dos períodos de cobrança existentes. Esses períodos (os "meses" que aparecem na ficha do atleta) são gerados automaticamente por um job diário; um atleta recém-inscrito pode não mostrar dívida nenhuma até essa geração acontecer. Consulte [Mensalidades de atleta](/docs/sistema/mensalidades-de-atleta) para perceber quando e como os meses são criados.
+</Callout>
+
+## Ações da barra de ferramentas
+
+<Steps>
+<Step>
+### Importar
+
+O botão **Importar** abre um assistente de importação em massa (CSV/Excel), com uma linha por inscrição atleta-modalidade. Use esta opção quando precisar de carregar vários atletas de uma vez, por exemplo no arranque de uma nova época.
+</Step>
+<Step>
+### Associar sócio
+
+O botão **Associar sócio** cria um atleta a partir de um sócio já existente no clube. Pesquise e selecione o sócio na caixa de pesquisa e confirme. O atleta criado partilha a mesma identidade e morada do sócio — não há duplicação de dados nem necessidade de preencher o formulário outra vez.
+
+<Callout title="Nos bastidores">
+Se a pessoa já teve um atleta associado que foi eliminado há menos de 14 dias, esse registo é reativado silenciosamente em vez de se criar um novo — recupera também as notas, documentos e inscrições que tinha guardadas. Não existe, atualmente, uma ação para desfazer a associação a partir deste ecrã: uma vez ligado, o vínculo entre sócio e atleta é permanente.
+</Callout>
+</Step>
+<Step>
+### Adicionar
+
+O botão **Adicionar** abre o formulário de criação de um atleta independente (sem vínculo a um sócio). Preencha os dados pessoais, morada e dados complementares — o contacto de emergência só é obrigatório se o atleta for menor de idade, calculado automaticamente a partir da data de nascimento introduzida.
+</Step>
+</Steps>
+
+## Onde continuar
+
+- [Gerir um atleta](/docs/atletas/gerir-atleta) — a ficha completa: perfil, documentos e inscrições.
+- [Mensalidades](/docs/atletas/mensalidades) — cobrança, descontos e histórico de pagamentos.
+- [Conformidade documental](/docs/atletas/conformidade-documental) — visão geral de documentos em falta ou a expirar em todos os atletas.

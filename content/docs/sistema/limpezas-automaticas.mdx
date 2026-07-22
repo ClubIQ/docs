@@ -1,0 +1,69 @@
+---
+title: Limpezas automáticas
+description: Janelas de recuperação para sócios e atletas eliminados, limpeza de sessões antigas, e os limites de atualização do dashboard.
+---
+
+Além dos jobs que criam quotas e mensalidades, há um conjunto de processos silenciosos que mantêm os dados do clube arrumados: purgam registos eliminados depois de um prazo de recuperação, limpam sessões de pagamento abandonadas, e atualizam os números do dashboard. Esta página reúne todos.
+
+## A janela de recuperação de 14 dias
+
+Quando um sócio ou um atleta é eliminado no BackOffice, o registo **não desaparece imediatamente**. Fica marcado como eliminado, mas continua recuperável durante **14 dias**. Passado esse prazo, um job noturno remove-o definitivamente.
+
+### Sócios eliminados — job das 02:00
+
+Todos os dias às 02:00 (UTC), o sistema procura sócios eliminados cuja janela de 14 dias já terminou e torna-os anónimos de forma definitiva: os dados de identidade são apagados/anonimizados e o **número de sócio** fica livre para ser reatribuído a outra pessoa. Esta ação é irreversível — não existe forma de desfazer no BackOffice depois deste passo.
+
+### Atletas eliminados — job das 00:20
+
+Todos os dias às 00:20 (UTC), o mesmo mecanismo corre para atletas: passados os 14 dias, os documentos carregados (identificação, informação médica), notas e contactos de emergência são removidos definitivamente. **O histórico de pagamentos e mensalidades é sempre preservado** como registo financeiro/de auditoria, mesmo depois desta purga — só os dados pessoais são apagados.
+
+<Callout title="Nos bastidores">
+Durante os 14 dias de janela, um sócio ou atleta eliminado continua a aparecer numa lista de "pendentes de eliminação" no BackOffice, de onde pode ser recuperado. Depois de o job noturno correr e a janela terminar, essa opção de recuperação desaparece — o registo torna-se um "vestígio" anónimo, sem dados pessoais associados.
+</Callout>
+
+### O que fazer se algo parecer errado
+
+Se a equipa do clube eliminar um sócio ou atleta por engano, a recuperação tem de acontecer **dentro dos 14 dias** seguintes à eliminação — depois disso, a anonimização é permanente e não há forma de reverter através do BackOffice.
+
+## Limpeza de sessões de checkout abandonadas
+
+Todos os domingos às 00:30 (UTC), o sistema apaga sessões de pagamento (Multibanco, MB Way e semelhantes) que ficaram **pendentes há mais de 7 dias** sem nunca se terem concluído — tipicamente, tentativas de checkout que o sócio começou e nunca terminou. Isto é apenas limpeza de dados internos: não há nenhum ecrã do BackOffice onde estas sessões abandonadas alguma vez tenham sido visíveis, por isso este job não tem qualquer efeito visível para a equipa do clube.
+
+## Tokens de sessão expirados
+
+De 12 em 12 horas (00:00 e 12:00 UTC), o sistema remove tokens de sessão já expirados. É pura limpeza de base de dados — uma sessão expirada já não podia ser usada de qualquer forma antes desta limpeza; o job só remove os registos que já não servem para nada.
+
+## O dashboard pode demorar a refletir uma mudança recente
+
+Os números e gráficos do **Dashboard** (receita, sócios) não são calculados em tempo real a cada visita — vêm de uma vista pré-calculada, que é atualizada:
+
+- De hora a hora, entre as 08:00 e as 23:00 (UTC), mais uma atualização à meia-noite (UTC).
+- Uma vez, cerca de 30 segundos depois de cada arranque do sistema, para que um dashboard não fique preso a dados velhos logo a seguir a uma atualização técnica.
+
+Isto significa que, entre a meia-noite e as 08:00 (UTC), existe uma janela de **até 8 horas** sem qualquer atualização, e durante o dia os dados podem ficar até **1 hora** desatualizados.
+
+<Callout title="Nos bastidores">
+Se a equipa do clube acabou de registar um pagamento e o dashboard não reflete esse valor de imediato, não é um erro — é o intervalo normal de atualização da vista. O valor vai aparecer na próxima atualização horária (ou, durante a noite, só de manhã).
+</Callout>
+
+## Materialização de eventos recorrentes
+
+Para eventos com recorrência (por exemplo, treinos semanais), o sistema garante, de hora a hora (aos minutos 5 de cada hora), que existem ocorrências concretas e clicáveis para os próximos dois dias (hoje e amanhã, em hora local do clube). É isto que dá a cada ocorrência próxima de um evento recorrente um identificador próprio, necessário para o check-in por QR code e o registo de presenças.
+
+Criar ou editar diretamente uma série de eventos recorrentes materializa as ocorrências próximas de imediato, na própria operação — não é preciso esperar pela passagem horária deste job. A espera de até 1 hora só se aplica ao caso em que uma ocorrência futura ainda não tinha sido criada por nenhuma outra via.
+
+## Perguntas frequentes
+
+<Accordions>
+<Accordion title="Eliminei um sócio por engano. Até quando o posso recuperar?">
+Até 14 dias depois da eliminação. Passado esse prazo, o job noturno das 02:00 torna o registo anónimo de forma permanente e irreversível.
+</Accordion>
+<Accordion title="O histórico de pagamentos de um atleta eliminado também desaparece ao fim dos 14 dias?">
+Não. Só os dados pessoais (documentos, notas, contactos de emergência) são removidos. O histórico de pagamentos e mensalidades é sempre preservado como registo financeiro.
+</Accordion>
+<Accordion title="Acabei de registar um pagamento grande e o dashboard não mudou. É um bug?">
+Provavelmente não. O dashboard atualiza de hora a hora durante o dia (08:00–23:00 UTC) e uma vez à meia-noite — pode demorar até uma hora a refletir um pagamento recente, e até 8 horas se o pagamento foi feito durante a noite.
+</Accordion>
+</Accordions>
+
+Para o comportamento automático ligado à filiação, veja [Quotas automáticas](/docs/sistema/quotas-automaticas). Para a visão geral dos automatismos de bastidores, veja [O sistema trabalha por si](/docs/sistema).

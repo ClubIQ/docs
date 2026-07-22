@@ -1,0 +1,36 @@
+---
+title: Inscrição de sócio
+description: Fluxo público de adesão a sócio em `/member-signup`, com confirmação de email e continuação para pagamento ou aprovação.
+---
+
+O fluxo de **inscrição de sócio** em **`/member-signup`** é diferente da inscrição desportiva. Aqui o objetivo é criar
+um novo sócio do clube, começando por um formulário público e passando por confirmação de email.
+
+## Como o fluxo decorre
+
+<Steps>
+<Step>
+O candidato preenche os dados iniciais e aceita o tratamento de dados.
+</Step>
+<Step>
+O sistema envia um código de verificação para o email indicado.
+</Step>
+<Step>
+Depois da confirmação do código, o utilizador completa os restantes dados.
+</Step>
+<Step>
+No fim, o sistema segue um de dois caminhos: ou redireciona para o primeiro pagamento, ou deixa a inscrição à espera
+de aprovação do clube.
+</Step>
+</Steps>
+
+## Quando a inscrição não avança logo para pagamento
+
+Se o clube trabalhar com aprovação prévia, o pedido termina num estado de espera. Nesse caso, a pessoa não é enviada
+de imediato para o pagamento da primeira quota.
+
+## Ver também
+
+- [Pagamentos](/docs/pagamentos)
+- [Sócios](/docs/socios)
+

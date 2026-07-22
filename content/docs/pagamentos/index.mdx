@@ -1,0 +1,125 @@
+---
+title: Pagamentos
+description: Consultar o histórico de pagamentos do clube, perceber os estados, emitir faturas e gerir reembolsos.
+---
+
+O módulo **Pagamentos** reúne todos os pagamentos do clube — sócios e atletas, feitos pelo próprio no telemóvel, na
+loja pública, no portal de pagamento ou registados manualmente pela secretaria. É o sítio para confirmar se um
+pagamento entrou, emitir fatura, reembolsar ou exportar dados para contabilidade.
+
+Este módulo não é onde se regista um pagamento a um sócio específico — isso faz-se na [ficha do sócio](/docs/socios/ficha-do-socio),
+na aba **Filiação e Quotas**, ou na ficha do atleta quando a dívida é desportiva. Aqui só se consulta e gere o que já
+aconteceu.
+
+<Callout title="Onde ficaram as notificações de regularização">
+As definições dos lembretes automáticos de regularização já não vivem dentro de **Pagamentos**. Hoje configuram-se em
+[Comunicações → Definições](/docs/comunicacoes/definicoes), no cartão de lembretes de regularização.
+</Callout>
+
+## Separador Histórico
+
+O separador **Histórico** mostra a lista global de pagamentos do clube, paginada, com filtros e exportação.
+
+### Colunas da tabela
+
+| Coluna | O que mostra |
+|---|---|
+| **Nome Completo** | Nome do sócio ou atleta associado ao pagamento |
+| **Montante** | Valor pago |
+| **Estado** | Estado do pagamento (ver abaixo) |
+| **Notas** | Notas internas registadas no momento do pagamento |
+| **Iniciado por** | Quem originou o pagamento — ver secção seguinte |
+| **Data** | Data do pagamento |
+
+### O que significa "Iniciado por"
+
+A coluna **Iniciado por** identifica quem deu origem ao pagamento. Pode ter três valores:
+
+- **Sócio** — o próprio sócio ou atleta pagou através da aplicação móvel.
+- **Administrador** — a secretaria ou um dirigente registou o pagamento manualmente no BackOffice. Quando é este o caso, o nome do administrador que registou o pagamento aparece como legenda por baixo do valor.
+- **Sistema** — o pagamento foi criado automaticamente, sem qualquer ação humana.
+
+O valor **Sistema** existe e não é um erro. Aparece quando uma quota mensal é gerada com valor 0 € — por exemplo, um sócio com 100% de desconto na sua classe. Nesse caso o sistema cria a quota já marcada como paga, atribuída a "Sistema", sem que ninguém tenha clicado em nada. Se esta situação for inesperada numa ficha de sócio, confirme a classe de sócio atribuída e o respetivo desconto.
+
+<Callout title="Nos bastidores">
+As quotas mensais são geradas automaticamente todas as noites por um job do sistema, não por um botão do BackOffice. Quando o valor calculado é 0 €, o próprio job cria também o pagamento — daí o "Sistema" nesta coluna. Para perceber a lógica completa de geração de quotas, consulte [Quotas automáticas](/docs/sistema/quotas-automaticas).
+</Callout>
+
+### Estados de pagamento
+
+O chip de **Estado** mostra um dos quatro valores seguintes. Nunca se guie apenas pela cor — o texto do estado está sempre visível no chip.
+
+| Valor interno | Texto no chip | Significado |
+|---|---|---|
+| `PENDING` | **Pendente** | Pagamento iniciado pelo sócio na aplicação, ainda a aguardar confirmação do meio de pagamento. Nunca aparece para pagamentos registados manualmente pela secretaria — esses ficam sempre **Concluído** de imediato. |
+| `COMPLETED` | **Concluído** | Pagamento confirmado e liquidado. |
+| `FAILED` | **Falhado** | O pagamento não se concluiu (por exemplo, meio de pagamento recusado). |
+| `REFUNDED` | **Reembolsado** | O pagamento foi reembolsado — ver [Reembolsar](#reembolsar-um-pagamento) abaixo. |
+
+### Filtros e exportação
+
+A barra de filtros permite restringir a lista por **data de início**, **data de fim**, **método de pagamento**,
+**iniciado por**, **estado** e outros critérios operacionais. O botão **Exportar** permite descarregar as colunas
+visíveis, por exemplo para entregar à contabilidade.
+
+![Vista do separador Histórico do módulo Pagamentos, com a tabela de pagamentos e a barra de filtros](/images/guide/pagamentos/historico.png)
+
+## Navegar para o detalhe de um sócio ou atleta
+
+Clicar numa linha da tabela leva diretamente à ficha do sócio ou do atleta em causa, já na aba de histórico de pagamentos, com o pagamento em questão destacado. Se não tiver permissões para ver essa ficha, aparece um aviso — *"Não tem acesso à página de detalhe deste pagamento."* — em vez de navegar.
+
+## Ações disponíveis por linha
+
+Dependendo do estado do pagamento, do fornecedor configurado e das suas permissões, cada linha pode mostrar até três
+ações:
+
+<Steps>
+<Step>
+**Criar/Ver fatura** — só visível se o clube tiver um sistema de faturação configurado, e só ativa quando o pagamento está **Concluído** com valor superior a 0 €. Ao clicar, se já existir uma fatura é aberta num novo separador; se ainda não existir, é criada nesse momento.
+
+Se não aparecer nenhuma ligação (o sistema mostra apenas um aviso de que a fatura foi criada mas o documento ainda não está disponível), confirme se o sócio ou atleta tem NIF preenchido na ficha — é uma causa comum para a fatura não ser gerada.
+</Step>
+<Step>
+**Ver nota de crédito** — só aparece em pagamentos **Reembolsado** que já tenham nota de crédito emitida.
+</Step>
+<Step>
+**Reembolsar** — só visível com permissão para reembolsar pagamentos, e só para pagamentos **Concluído**, com valor superior a 0 € e **iniciados pelo sócio** (Iniciado por = Sócio). Pagamentos registados manualmente pela secretaria não podem ser reembolsados por esta via, porque não existe uma transação junto do meio de pagamento original para reverter.
+</Step>
+</Steps>
+
+### Reembolsar um pagamento
+
+<Steps>
+<Step>
+Na linha do pagamento, clique no ícone **Reembolsar**.
+</Step>
+<Step>
+Confirme o nome do pagador e o valor apresentados no diálogo **Reembolsar pagamento**.
+</Step>
+<Step>
+Preencha o motivo do reembolso (campo **Motivo**, obrigatório, até 500 carateres). O botão de confirmação só fica ativo depois de escrito um motivo.
+</Step>
+<Step>
+Clique em **Reembolsar pagamento** para confirmar. Esta ação não pode ser desfeita.
+</Step>
+</Steps>
+
+<Callout title="Nos bastidores">
+Se o pagamento tinha sido feito pelo sócio através de um meio de pagamento eletrónico (por exemplo Multibanco), o valor é devolvido através do fornecedor de pagamentos para o método original. Depois do reembolso, as quotas ou mensalidades associadas voltam a aparecer como **Em dívida** — sem qualquer aviso adicional a ligar essa mudança ao reembolso que acabou de fazer. Se notar uma quota que estava paga a voltar a "Em dívida", verifique se houve um reembolso recente antes de assumir um erro.
+</Callout>
+
+## Registar um pagamento manual
+
+Este módulo não tem um botão para registar um pagamento novo — essa ação faz-se sempre a partir da ficha do sócio ou atleta em questão, na aba **Filiação e Quotas**, onde pode:
+
+- Pagar uma ou várias quotas em dívida.
+- Registar o primeiro pagamento de um sócio novo (joia + primeiras mensalidades).
+- Registar um pagamento antecipado de meses futuros.
+- Regularizar taxas pontuais em dívida (por exemplo, uma joia adicionada depois de a quota já estar em dia).
+
+Consulte [Quotas e filiação](/docs/socios/quotas-e-filiacao) para o passo a passo completo de cada um destes fluxos.
+
+## Ver também
+
+- [Comunicações — Definições](/docs/comunicacoes/definicoes) para configurar os lembretes automáticos de regularização.
+- [Notificações de regularização](/docs/pagamentos/notificacoes) para perceber a lógica desses lembretes sem entrar na página de configuração.

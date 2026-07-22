@@ -1,0 +1,81 @@
+---
+title: Gerir um atleta
+description: A ficha do atleta — perfil, documentos federativos e inscrições em modalidades.
+---
+
+A ficha do atleta reúne tudo o que a secretaria precisa sobre uma pessoa inscrita numa modalidade: dados pessoais, documentos exigidos pela federação e o histórico de inscrições por época. Chega-se aqui a partir da [lista de Atletas](/docs/atletas), clicando numa linha.
+
+## Cabeçalho da ficha
+
+No topo da ficha encontra o nome do atleta e, quando aplicável, um chip de ligação ao sócio associado. As ações disponíveis dependem do estado de pagamento e das inscrições do atleta:
+
+- **Pagar dívidas** — aparece quando há mensalidades vencidas por pagar; abre o ecrã de pagamento com os meses em dívida pré-selecionados.
+- **Editar** — atualiza os dados pessoais, morada e dados complementares do atleta.
+- **Adicionar inscrição** — regista o atleta numa nova combinação de modalidade/escalão e época.
+
+![Cabeçalho da ficha do atleta com as ações Pagar dívidas, Editar e Adicionar inscrição](/images/guide/atletas/ficha-perfil.png)
+
+## Separador Perfil
+
+O separador **Perfil** mostra os dados pessoais do atleta (nome, documento de identificação, NIF, morada, contacto), o **contacto de emergência** (nome e telefone — obrigatório apenas para atletas menores de idade) e dois blocos adicionais:
+
+- **Família associada** — encarregados de educação ligados ao atleta.
+- **Notas** — texto livre para observações internas da secretaria.
+
+![Separador Perfil com dados pessoais, contacto de emergência, família associada e notas](/images/guide/atletas/ficha-perfil.png)
+
+## Separador Documentos
+
+O separador **Documentos** é o arquivo privado de ficheiros do atleta e a lista de requisitos federativos por modalidade.
+
+<Steps>
+<Step>
+### Requisitos federativos por modalidade
+
+Cada modalidade em que o atleta está inscrito pode exigir documentos específicos — por exemplo **CC ou passaporte** ou **Autorização parental**. Esta secção cruza as modalidades ativas do atleta com os documentos exigidos e mostra o estado de cada requisito, para que a secretaria veja de imediato o que falta.
+</Step>
+<Step>
+### Arquivo de documentos
+
+Pode carregar, descarregar, editar os metadados, renomear e eliminar ficheiros associados ao atleta. Os formatos aceites são **PDF**, **JPG**, **JPEG**, **PNG** e **WEBP**.
+</Step>
+</Steps>
+
+![Separador Documentos com o arquivo de ficheiros e os requisitos federativos por modalidade](/images/guide/atletas/ficha-documentos.png)
+
+<Callout title="Nos bastidores">
+Este separador alimenta a página [Conformidade documental](/docs/atletas/conformidade-documental), que junta o estado de documentos de todos os atletas do clube num único ecrã de vigilância — útil para detetar em bloco quem tem documentos em falta ou a expirar antes do início de uma época.
+</Callout>
+
+## Separador Inscrições
+
+O separador **Inscrições** lista as inscrições do atleta em modalidades, cada uma associada a um escalão e uma época, com o respetivo preço mensal.
+
+<Steps>
+<Step>
+### Adicionar uma inscrição
+
+Clique em **Adicionar inscrição**, escolha a combinação de **Escalão / época** ainda disponível (o sistema filtra automaticamente as combinações em que o atleta já está inscrito) e defina a data de **Início** — por omissão, o dia de hoje.
+</Step>
+<Step>
+### Encerrar uma inscrição
+
+Para terminar uma inscrição ativa, use **Encerrar inscrição**. Pode indicar um **Motivo**, em texto livre, opcional.
+</Step>
+<Step>
+### Histórico
+
+As inscrições já encerradas ficam visíveis no histórico do separador, para consulta posterior.
+</Step>
+</Steps>
+
+![Separador Inscrições com o histórico de inscrições por escalão e época, preço mensal e ação Encerrar inscrição](/images/guide/atletas/ficha-inscricoes.png)
+
+<Callout title="Nos bastidores">
+O preço mensal de cada inscrição vem do escalão associado à modalidade, não é digitado à mão. Se juntar uma nova modalidade a um atleta a meio da época que já tem meses pagos ou pré-pagos, o sistema cobra automaticamente o valor em falta desses meses já alcançados — nunca cobra meses futuros ainda não chegados. Consulte [Escalões](/docs/gestao-desportiva/escaloes) para configurar os preços e [Mensalidades de atleta](/docs/sistema/mensalidades-de-atleta) para perceber a geração automática dos meses de cobrança.
+</Callout>
+
+## Onde continuar
+
+- [Mensalidades](/docs/atletas/mensalidades) — separadores Cobrança e Pagamentos do atleta.
+- [Conformidade documental](/docs/atletas/conformidade-documental) — visão global de documentos em falta.

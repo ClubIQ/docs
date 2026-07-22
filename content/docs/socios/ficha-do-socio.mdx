@@ -1,0 +1,61 @@
+---
+title: Ficha do sócio
+description: A vista detalhada do sócio com dados pessoais, pagamentos, histórico de auditoria e ciclo de eliminação.
+---
+
+A ficha do sócio reúne tudo o que o clube sabe sobre uma pessoa: dados de identidade,
+finanças da filiação, histórico de pagamentos e traço de auditoria.
+
+## Cabeçalho
+
+No topo da ficha pode ver a fotografia do sócio, o estado de filiação, **Número de Sócio** (quando
+já atribuído) e uma ação **Editar** que abre os mesmos campos usados na criação.
+
+## Separadores
+
+### Informação pessoal
+
+Mostra identidade, dados de contacto, morada e informação de encarregado de educação quando for relevante.
+
+### Quotas e filiação
+
+O separador financeiro da ficha. Inclui estado de filiação, valor da quota, anos de filiação,
+taxas únicas e períodos mensais agrupados por ano. Está descrito em detalhe em
+[Quotas e filiação](/docs/socios/quotas-e-filiacao).
+
+### Histórico de pagamentos
+
+Histórico cronológico de todos os pagamentos registados para este sócio.
+
+### Auditoria
+
+Historial a nível de campo das alterações: valor antigo, valor novo, quem alterou e quando. Isto inclui
+alterações de identidade, encarregados associados, fotografia de perfil e ações como criar, aprovar, rejeitar,
+eliminar e recuperar.
+
+<InfoCallout title="Ferramenta útil de confiança">
+A auditoria é o local para verificar se uma alteração veio de um colaborador da secretaria ou do próprio sócio através
+da app, especialmente quando alguém contesta um valor alterado como morada ou telefone.
+</InfoCallout>
+
+## Eliminar e recuperar um sócio
+
+Eliminar um sócio não apaga o registo imediatamente:
+
+- O sócio é marcado como eliminado e a conta de app é desativada
+- Inicia-se uma janela de recuperação de **14 dias**
+- Durante essa janela o registo pode ser recuperado
+- Depois de terminar a janela, o registo é anonimizad0 permanentemente
+
+<WarningCallout title="Limpeza final automática">
+Um job em segundo plano processa todos os dias os sócios em espera de eliminação expirados. Assim que a janela de 14 dias
+passa, a eliminação torna-se irreversível.
+</WarningCallout>
+
+## Relacionados
+
+<Cards>
+  <Card title="Lista de sócios" href="/docs/socios" />
+  <Card title="Quotas e filiação" href="/docs/socios/quotas-e-filiacao" />
+  <Card title="Limpezas automáticas" href="/docs/sistema/limpezas-automaticas" />
+</Cards>

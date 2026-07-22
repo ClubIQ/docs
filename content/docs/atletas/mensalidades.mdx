@@ -1,0 +1,52 @@
+---
+title: Mensalidades
+description: Cobrança mensal do atleta — valor base, ajustes, períodos gerados pelo sistema e histórico de pagamentos.
+---
+
+A cobrança de um atleta é feita por mês, através de **períodos de cobrança** gerados automaticamente pelo sistema à medida que o tempo passa. Esta página explica o separador **Cobrança** — onde vê o valor de cada mês e o regista como pago — e o separador **Pagamentos**, com o histórico.
+
+## Separador Cobrança
+
+Cada mês de mensalidade mostra a composição do valor a pagar:
+
+```
+BASE + AJUSTES TOTAIS = TOTAL MENSAL
+```
+
+O **BASE** é o preço mensal definido no escalão da modalidade em que o atleta está inscrito. Os **AJUSTES TOTAIS** somam quaisquer descontos ou acréscimos aplicados ao atleta (ver secção seguinte). O **TOTAL MENSAL** é o valor efetivamente devido nesse mês.
+
+![Separador Cobrança do atleta com o valor base, ajustes e total mensal por período](/images/guide/atletas/ficha-cobranca.png)
+
+<Callout title="Nos bastidores">
+O **Mês de cobrança** de cada linha corresponde sempre a um mês de calendário completo — não há cobrança proporcional aos dias. Um atleta que se inscreve a meio do mês paga o mês completo, não uma fração dele.
+</Callout>
+
+### Descontos
+
+Os ajustes aplicados a um atleta funcionam como acréscimos ou reduções sobre o valor base do escalão, refletindo-se diretamente na linha **AJUSTES TOTAIS** de cada mês. Um ajuste criado ou alterado é sincronizado de imediato nos meses ainda não pagos — os meses já pagos ficam "congelados" com o valor que tinham no momento do pagamento e não são recalculados a posteriori.
+
+### Períodos de cobrança
+
+Os meses que vê nesta tabela não são escritos manualmente — são **gerados pelo sistema**. Um mês só aparece depois de ter começado; o sistema nunca cria meses futuros antecipadamente. Por isso, a lista de mensalidades de um atleta não é uma previsão completa da época: reflete apenas os meses já materializados até ao momento.
+
+<Callout title="Nos bastidores">
+Um job diário, às 00:10, percorre todas as inscrições ativas e gera o mês seguinte de cobrança para cada uma, usando sempre o preço atual do escalão nesse momento. Se uma inscrição ficar sem cobrança gerada durante vários dias (por exemplo, por uma falha técnica), o job recupera todos os meses em atraso na execução seguinte, não apenas o mais recente. Consulte [Mensalidades de atleta](/docs/sistema/mensalidades-de-atleta) para o detalhe completo deste processo e [Escalões](/docs/gestao-desportiva/escaloes) para a configuração dos preços por escalão.
+</Callout>
+
+### Registar o pagamento
+
+Use **Pagar tudo** para liquidar de uma vez todos os meses em dívida do atleta, ou **Pagar ano** para liquidar apenas os meses em dívida de um ano específico.
+
+<Callout title="Nos bastidores">
+Enquanto o atleta tiver qualquer mês em dívida, o sistema não permite adiantar o pagamento de meses futuros ainda não gerados — a opção de pagamento antecipado só fica disponível quando não há dívida pendente. A regra existe para evitar que um atleta pague meses à frente enquanto ainda deve meses anteriores; regularize sempre a dívida existente primeiro através de **Pagar tudo** ou **Pagar ano**.
+</Callout>
+
+## Separador Pagamentos
+
+O separador **Pagamentos** mostra o histórico de pagamentos já registados para o atleta — os mesmos pagamentos que alimentam a lista global em [Pagamentos](/docs/pagamentos).
+
+## Onde continuar
+
+- [Gerir um atleta](/docs/atletas/gerir-atleta) — perfil, documentos e inscrições.
+- [Escalões](/docs/gestao-desportiva/escaloes) — onde se define o preço mensal base de cada escalão.
+- [Mensalidades de atleta](/docs/sistema/mensalidades-de-atleta) — como e quando o sistema gera os meses de cobrança.

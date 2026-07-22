@@ -1,0 +1,127 @@
+---
+title: Cobranças
+description: Configurar as quotas, joias, mensalidades e outras cobranças que o clube aplica aos associados e atletas.
+---
+
+O separador **Cobranças**, em Administração → Configurações, é o local onde se define tudo o que o clube cobra: a quota de associado, joias de inscrição, mensalidades de atleta, donativos e cobranças pontuais. Cada linha desta tabela representa um tipo de cobrança configurado — e não uma cobrança individual de um associado específico. Utilize este ecrã para criar novas cobranças, ajustar valores e taxas de IVA, ou desativar cobranças que já não se apliquem.
+
+![Tabela de Cobranças do Clube com nome, referência, valor, tipo, estado e IVA](/images/guide/administracao/cobrancas.png)
+
+## A tabela de cobranças
+
+Colunas apresentadas: **Nome**, **Referência** (o código curto enviado ao sistema de faturação para esta linha de cobrança), **Descrição** (o texto que consta como descrição da linha na fatura), **Valor**, **Tipo de cobrança**, **Estado** (**Ativo**/**Inativo**), **Taxa IVA %** e **Código de isenção**.
+
+A coluna **Valor** nem sempre apresenta um número:
+
+- **Derivado do escalão** — aplicável a mensalidades de atleta: o valor não é fixo nesta secção, sendo proveniente do escalão/divisão do atleta.
+- **Valor não fixo** — aplicável a donativos: não existe um valor único, cada donativo é de caráter livre.
+
+## Os tipos de cobrança
+
+O campo **Tipo de cobrança** determina o comportamento da cobrança e não pode ser alterado após a criação no caso dos dois tipos únicos (quota de associado e mensalidade de atleta). Os seis tipos disponíveis são:
+
+<Accordions>
+<Accordion title="Quota de associado">
+Cobrança recorrente aplicada a todos os associados. Apenas pode existir **uma** cobrança deste tipo por clube — caso já exista uma, a opção surge desativada na lista. O tipo não pode ser alterado após a criação, e a cobrança não pode ser desativada ou eliminada (ver [Ações](#ações-sobre-uma-cobrança) abaixo). É esta cobrança que providencia os valores para as quotas mensais visíveis na [ficha de cada associado](/docs/socios/quotas-e-filiacao).
+</Accordion>
+<Accordion title="Inscrição de associado (Joia)">
+Cobrança única, aplicada no momento em que um novo associado se inscreve.
+</Accordion>
+<Accordion title="Mensalidade de atleta">
+Mensalidade cobrada aos atletas, cujo valor é **derivado do escalão** do atleta — não se define um valor fixo nesta secção, pelo que o campo **Valor** permanece oculto no formulário. Apenas pode existir uma cobrança deste tipo por clube, e o tipo fica também bloqueado após a criação. Consulte [Mensalidades de atleta](/docs/sistema/mensalidades-de-atleta) para compreender como o valor é calculado a partir da divisão/escalão.
+</Accordion>
+<Accordion title="Inscrição de atleta">
+Cobrança única, aplicada no momento em que um novo atleta se inscreve.
+</Accordion>
+<Accordion title="Donativo">
+Contribuição voluntária, sem valor fixo — o campo **Valor** também permanece oculto no formulário, uma vez que cada donativo é de caráter livre.
+</Accordion>
+<Accordion title="Outra cobrança">
+Cobrança configurável, aplicada manualmente sempre que necessário.
+</Accordion>
+</Accordions>
+
+## Criar Nova Cobrança
+
+<Steps>
+<Step>
+Clique em **Criar Nova Cobrança** (canto superior direito).
+</Step>
+<Step>
+Preencha o **Nome** da cobrança (3 a 100 caracteres).
+</Step>
+<Step>
+Escolha o **Tipo de cobrança**. Passe o cursor sobre cada opção para visualizar uma descrição curta. Note que as opções **Quota de associado** e **Mensalidade de atleta** surgem desativadas na lista caso já exista uma cobrança desse tipo no clube.
+</Step>
+<Step>
+Se o tipo selecionado não for **Mensalidade de atleta** nem **Donativo**, preencha o **Valor** (em euros) — este campo é obrigatório para todos os restantes tipos.
+</Step>
+<Step>
+Preencha a **Referência padrão**, correspondente ao código enviado para o sistema de faturação para esta cobrança. Este campo apenas fica disponível após o clube ter um fornecedor de faturação configurado — até que isso aconteça, o campo surge bloqueado com a indicação "Configure um fornecedor de faturação para editar as referências".
+</Step>
+<Step>
+Defina a **Descrição** que constará na fatura. Para a **Quota de associado** e **Mensalidade de atleta**, este campo apresenta o seletor de **Modelo da descrição recorrente** (ver secção seguinte) em vez de uma caixa de texto simples.
+</Step>
+<Step>
+Defina a **Taxa IVA % padrão** (0 a 100).
+</Step>
+<Step>
+Se a taxa de IVA for exatamente 0, preencha o **Código de isenção de IVA** (ex.: "M07") — este campo apenas fica ativo e é obrigatório quando o IVA está a 0% e o tipo de cobrança não é Donativo.
+</Step>
+<Step>
+Clique em **Criar Nova Cobrança** para confirmar.
+</Step>
+</Steps>
+
+<Callout title="Atenção às referências e ao fornecedor de faturação">
+A **Referência padrão** apenas pode ser editada após o clube ter um fornecedor de faturação (ex.: Moloni) configurado. Sem esta configuração, todas as cobranças ficam sem referência própria e as faturas geradas apresentam unicamente a descrição. Contacte o suporte ClubIQ caso necessite de configurar a integração de faturação.
+</Callout>
+
+<InfoCallout title="Ligação com a integração Moloni">
+Quando o clube utiliza a Moloni como fornecedor de faturação, a autorização é concluída através de um retorno técnico
+para uma rota interna do BackOffice (`/integrations/moloni/callback`). Essa página não aparece na navegação: serve
+apenas para mostrar o resultado da ligação e devolver o operador à área de Administração.
+</InfoCallout>
+
+### Modelo da descrição recorrente
+
+Para a **Quota de associado** e **Mensalidade de atleta**, a descrição da fatura é gerada a partir de um modelo com variáveis, e não através de texto fixo. Escolha um dos modelos predefinidos ou personalize:
+
+| Modelo | Resultado (exemplo, nome "Quota") |
+|---|---|
+| Nome + mês (texto) | "Quota - mês março 2026" |
+| Nome + mês | "Quota - março 2026" |
+| Nome + número do mês | "Quota - 03/2026" |
+| Nome + modalidade/escalão (apenas Mensalidade de atleta) | "Quota Futebol/Sub-17 - 03/2026" |
+| Personalizado | texto livre, com variáveis arrastáveis |
+
+No modo **Personalizado**, pode escrever ou arrastar variáveis para a caixa de texto. Para uma **Quota de associado**, estão disponíveis as variáveis: mês, número do mês e ano; para uma **Mensalidade de atleta**, dispõe ainda de época, divisão e modalidade. Esta descrição é posteriormente copiada de forma automática para cada cobrança gerada a partir desta configuração — assegurando assim que o texto que o associado visualiza na fatura seja consistente mês após mês.
+
+## Ações sobre uma cobrança
+
+Cada linha da tabela dispõe das seguintes ações:
+
+- **Ativar/Desativar** — altera o estado da cobrança. Esta opção encontra-se indisponível para a **Quota de associado**: este tipo não pode ser desativado.
+- **Editar** — abre o mesmo formulário de criação, pré-preenchido.
+- **Eliminar** — remove a cobrança. Esta opção encontra-se indisponível para a **Quota de associado**: este tipo não pode ser eliminado.
+- **Reaplicar a cobrança a todos os membros** — ver detalhes abaixo.
+
+### Reaplicar a cobrança a todos os membros
+
+Esta ação (representada pelo ícone de repetição) volta a aplicar a cobrança a todos os associados elegíveis — **incluindo associados que já a tenham liquidado**. Ao confirmar, o sistema apresenta o seguinte aviso: *"Tem a certeza de que deseja reaplicar a cobrança '«nome»' a todos os membros aplicáveis? Isto também afeta associados que já a pagaram."* — acompanhado pela nota adicional "Utilize com cautela".
+
+Utilize esta ação, por exemplo, para lançar novamente uma joia anual a todos os associados no início de uma nova época. Não se encontra disponível para a **Quota de associado** (as quotas mensais seguem o seu próprio ciclo automático, e não este mecanismo — ver [Quotas automáticas](/docs/sistema/quotas-automaticas)).
+
+<Callout title="Nos bastidores" type="warn">
+Reaplicar uma cobrança não atualiza a cobrança existente — cria internamente uma nova cobrança, com um identificador diferente, e desativa a anterior de forma silenciosa. Para os colaboradores, este processo é invisível no ecrã, mas significa que os relatórios ou históricos que dependam do identificador antigo da cobrança deixam de "acompanhar" essa linha após a reaplicação. Utilize esta ação apenas quando pretender efetivamente cobrar tudo novamente a todos os membros, e não como forma de "atualizar" uma cobrança já existente — para esse efeito, utilize a opção **Editar**.
+</Callout>
+
+<Callout title="As alterações de valor não são retroativas">
+Alterar o **Valor** de uma cobrança nesta secção não modifica os valores que os associados já têm em dívida. As quotas ou cobranças já geradas (por exemplo, a quota deste mês que já foi lançada na ficha de um associado) mantêm o valor antigo — apenas as cobranças seguintes, geradas após a alteração, irão refletir o novo valor. O mesmo princípio aplica-se ao alterar a classe de associado de um utilizador: o novo desconto apenas será aplicado a partir da próxima quota gerada. Consulte [Quotas automáticas](/docs/sistema/quotas-automaticas) para compreender quando e de que forma as quotas subsequentes são criadas.
+</Callout>
+
+## Ver também
+
+- [Classes de Sócio](/docs/administracao/classes-de-socio) — os escalões etários e descontos que se conjugam com a Quota de associado.
+- [Quotas e filiação](/docs/socios/quotas-e-filiacao) — secção onde as quotas geradas a partir destas cobranças são apresentadas na ficha de cada associado.
+- [Mensalidades de atleta](/docs/sistema/mensalidades-de-atleta) — como é calculado o valor "Derivado do escalão".

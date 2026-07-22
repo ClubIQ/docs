@@ -1,0 +1,55 @@
+---
+title: Inscrições
+description: Gestão dos pedidos de entrada de atletas e dos formulários públicos ligados a esse processo.
+---
+
+A secção **Inscrições** junta duas realidades relacionadas: a caixa de entrada interna onde a equipa acompanha os
+pedidos recebidos e os formulários públicos usados por atletas, encarregados de educação e novos sócios.
+
+## O que faz parte desta área
+
+- **Caixa de entrada** dos pedidos recebidos.
+- **Pedidos descartados** com possibilidade de restaurar ou eliminar de vez.
+- **Configurações** do formulário público de inscrição de atletas.
+- **Inscrição pública** de atletas em `/signup`.
+- **Completar inscrição** em `/signup/complete/:token`.
+- **Inscrição de sócio** em `/member-signup`.
+
+<Callout title="Nem tudo aparece na barra lateral">
+A página interna **Inscrições** aparece na navegação quando o clube e a conta autenticada têm acesso a ela. Já os
+formulários públicos são abertos por link direto e não exigem sessão iniciada no BackOffice.
+</Callout>
+
+<Cards>
+  <Card
+    title="Caixa de entrada"
+    href="/docs/inscricoes/caixa-de-entrada"
+    description="Pedidos recebidos, filtros e triagem operacional."
+  />
+  <Card
+    title="Pedidos descartados"
+    href="/docs/inscricoes/pedidos-descartados"
+    description="Restaurar pedidos removidos da vista principal ou eliminá-los em definitivo."
+  />
+  <Card
+    title="Configurações"
+    href="/docs/inscricoes/configuracoes"
+    description="Definir o comportamento e os campos do formulário público."
+  />
+  <Card
+    title="Inscrição pública"
+    href="/docs/inscricoes/inscricao-publica"
+    description="Formulário público de inscrição de atletas e educandos."
+  />
+  <Card
+    title="Completar inscrição"
+    href="/docs/inscricoes/completar-inscricao"
+    description="Pedido público de dados adicionais do jogador através de link seguro."
+  />
+  <Card
+    title="Inscrição de sócio"
+    href="/docs/inscricoes/inscricao-de-socio"
+    description="Fluxo público de adesão a sócio com confirmação por email."
+  />
+</Cards>
+

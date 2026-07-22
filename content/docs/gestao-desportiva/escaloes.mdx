@@ -1,0 +1,55 @@
+---
+title: Escalões
+description: Como criar e editar escalões desportivos, com idades e preço de atleta.
+---
+
+O separador **Escalões** define as faixas etárias dentro de cada [modalidade](/docs/gestao-desportiva/modalidades) — por exemplo, "Sub-15" ou "Sénior" no Futebol. É também aqui que se define a **Mensalidade atleta**, o valor que alimenta a mensalidade cobrada aos atletas inscritos nesse escalão.
+
+<Callout title="Escalão desportivo ≠ Classe de Sócio">
+Este escalão organiza a prática desportiva e o seu preço. Não confundir com as [Classes de Sócio](/docs/administracao/classes-de-socio), que agrupam sócios por idade para efeitos de quota. São dois registos e dois preços diferentes.
+</Callout>
+
+## Criar Escalão
+
+<Steps>
+<Step>
+Clique em **Adicionar Escalão**.
+</Step>
+<Step>
+Escolha a **Modalidade** a que este escalão pertence.
+</Step>
+<Step>
+Preencha o **Nome** (ex.: "Sub-15", "Sénior").
+</Step>
+<Step>
+Preencha a **Descrição** (opcional).
+</Step>
+<Step>
+Na secção **Faixa etária**, preencha a **Idade mínima** e a **Idade máxima**. O ecrã mostra automaticamente o intervalo de anos de nascimento correspondente à idade indicada, como ajuda de leitura.
+</Step>
+<Step>
+Na secção **Preço do atleta**, defina a **Mensalidade atleta** — a mensalidade mensal do atleta neste escalão. Este campo é opcional; se ficar em branco, o escalão não tem preço de atleta definido.
+</Step>
+<Step>
+Se quiser que este seja o escalão mostrado preferencialmente na app/website para esta modalidade, ative a opção **Escalão preferencial**. Só pode haver um escalão preferido por modalidade — ativar esta opção num escalão desativa-a automaticamente em qualquer outro escalão da mesma modalidade.
+</Step>
+<Step>
+Clique em **Criar Escalão**.
+</Step>
+</Steps>
+
+![Lista de escalões com modalidade, nome, idades e preço de atleta](/images/guide/gestao-desportiva/escaloes.png)
+
+## O que acontece ao mudar o preço
+
+A **Mensalidade atleta** definida no escalão é o valor que alimenta as [mensalidades dos atletas inscritos](/docs/atletas/mensalidades) nesse escalão, através da combinação escalão × época em que estão inscritos.
+
+<Callout title="Nos bastidores">
+Alterar a **Mensalidade atleta** de um escalão já existente propaga imediatamente o novo valor para todas as épocas em que esse escalão está associado — exceto épocas já **Concluídas**, que ficam sempre congeladas com o preço que tinham nessa altura. O ecrã de edição do escalão não avisa disto: se o escalão estiver associado a uma época em curso ou futura, o preço muda aí também, sem confirmação adicional. Consulte [Mensalidades de atleta](/docs/atletas/mensalidades) para perceber o efeito nas mensalidades já geradas e por gerar.
+</Callout>
+
+Tal como acontece com as quotas de sócio, uma alteração de preço nunca é retroativa a meses já cobrados a um atleta: um mês já gerado mantém o valor com que foi criado. O preço novo só é usado a partir dos meses seguintes.
+
+## Eliminar um Escalão
+
+Um escalão só pode ser eliminado se não tiver associações a nenhuma época e não tiver eventos associados. Se existirem inscrições, épocas ou eventos ligados a este escalão, remova-os primeiro (ver [Épocas](/docs/gestao-desportiva/epocas)).

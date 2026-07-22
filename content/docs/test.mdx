@@ -1,0 +1,36 @@
+---
+title: Pré-visualização da Interface
+description: Uma página de validação visual para verificar a estrutura da documentação, cartões de conteúdo, notas e blocos de código.
+---
+
+Utilize esta página para efetuar uma verificação de consistência da estrutura da documentação enquanto a arquitetura de informação (IA) e o conteúdo final ainda estão a ser preparados.
+
+## Notas (Callouts)
+
+<Callout type="info" title="Informação">
+Utilize notas informativas discretas para contextualização, e não para ênfase decorativa.
+</Callout>
+
+<Callout type="warning" title="Aviso">
+Os avisos devem ter um caráter operacional e preciso, assemelhando-se mais a orientações sobre o produto do que a um texto editorial.
+</Callout>
+
+## Cartões (Cards)
+
+<Cards>
+  <Card
+    title="Arquitetura"
+    description="Encaminhamento (routing), estado, cliente de API e padrões de dados."
+  />
+  <Card
+    title="Permissões"
+    description="A validação em dois eixos: flag de funcionalidade (feature flag) mais permissão."
+  />
+</Cards>
+
+## Bloco de código
+
+```ts
+export function isFeatureVisible(hasPermission: boolean, featureEnabled: boolean) {
+  return hasPermission && featureEnabled;
+}

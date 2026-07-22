@@ -1,0 +1,130 @@
+---
+title: Primeiros passos
+description: Como aceder ao BackOffice, compreender a shell e saber por que razão utilizadores diferentes veem menus diferentes.
+---
+
+Esta página cobre o essencial para começar a trabalhar no ClubIQ BackOffice: como iniciar sessão, como a shell
+principal está organizada, o que o painel mostra e por que razão a barra lateral pode diferir da de outro
+utilizador.
+
+## Aceder ao BackOffice
+
+O acesso ao BackOffice utiliza uma conta de utilizador do clube. Não existe alternativa de login social nem
+switcher de idioma em runtime. Cada publicação utiliza o locale configurado para o clube.
+
+<Steps>
+<Step>Abrir a página de login do BackOffice.</Step>
+<Step>Introduzir o seu **Email**.</Step>
+<Step>Introduzir a sua **Password**.</Step>
+<Step>
+Clicar em **Iniciar sessão**. Se a sua conta tiver acesso a pelo menos um ecrã, entra no painel. Caso contrário,
+será redirecionado para uma página que indica que não tem acesso a nenhuma área.
+</Step>
+</Steps>
+
+![Ecrã de login do BackOffice com campos de email e password](/images/guide/geral/login.png)
+
+Esqueceu-se da palavra-passe ou precisa de a alterar depois de iniciar sessão? Consulte o [menu de conta](#menu-de-conta)
+abaixo.
+
+## A shell geral
+
+Depois de iniciar sessão, a aplicação organiza-se em três zonas fixas: a **barra lateral**, o **cabeçalho** e o
+conteúdo atual da página.
+
+### Barra lateral
+
+A barra lateral lista as áreas a que a sua conta pode aceder. Nem todos os utilizadores veem os mesmos itens.
+Isso é explicado em [Permissões e disponibilidade de funcionalidade](#permissoes-e-disponibilidade-de-funcionalidade-porque-a-sua-barra-lateral-pode-diferir).
+
+![Vista geral do menu lateral do BackOffice](/images/guide/geral/menuGeral.png)
+
+Os itens de topo normalmente incluem:
+
+- **Painel** para indicadores gerais do clube
+- **Sócios** para associação, quotas e estado de associação
+- **Atletas** para atletas, conformidade documental e faturação
+- **Inscrições** para pedidos de entrada de atletas e configuração do formulário público
+- **Pagamentos** para histórico de pagamentos, faturas e reembolsos
+- **Comunicações** para envios manuais, modelos, campanhas e histórico
+- **Notícias** para conteúdos publicados na app
+- **Loja** para catálogo, encomendas, vendas e loja pública
+- **Gestão Desportiva** para modalidades, divisões, épocas e competições
+- **Eventos** para o calendário do clube
+
+Duas áreas agrupadas ficam mais abaixo na barra lateral:
+
+**App**
+- **Utilizadores** para contas de utilizador da aplicação móvel
+- **Configuração** para comportamento da aplicação e métodos de pagamento móvel
+- **Ranking** para vistas de classificação e gamificação
+
+**Administração**
+- **IAM** para contas de staff, cargos e permissões
+- **Configuração** para classes de sócio, cobranças e definições gerais do clube
+- **Parceiros** para registos e atividade de parceiros
+
+<WarningCallout title="Nomes repetidos">
+Existe uma página de configuração em **App** e outra em **Administração**. São ecrãs diferentes com
+responsabilidades diferentes, pelo que deve confirmar sempre que secção alguém está a referir.
+</WarningCallout>
+
+### Cabeçalho
+
+O cabeçalho está sempre visível e inclui:
+
+- Um botão de ajuda que abre o manual oficial do BackOffice em PDF num novo separador
+- **Reportar erro**, que abre o formulário de problema na aplicação a partir da página em que está
+- O menu de conta no canto superior direito
+
+#### Menu de conta
+
+O menu de conta mostra o seu nome e email, o seletor de aparência, **Alterar palavra-passe** e **Terminar sessão**.
+
+- **Seletor de aparência** — permite escolher entre modo claro, escuro ou seguir o tema do sistema.
+- **Persistência do tema** — a aparência escolhida fica guardada para as sessões seguintes no mesmo navegador.
+- **Alterar palavra-passe** — abre um diálogo próprio para definir uma nova palavra-passe sem sair do BackOffice.
+- **Terminar sessão** — encerra a sessão atual e devolve o utilizador ao ecrã de login.
+
+## O painel
+
+O painel é o ecrã inicial por defeito para os utilizadores que têm acesso a ele. Oferece uma visão rápida da saúde
+do clube sem necessidade de abrir cada área separadamente.
+
+Mostra quatro cartões métricos principais: sócios ativos, receita total, novos sócios este mês e crescimento mensal
+de receita. Abaixo disso, um gráfico mostra a evolução de receita e associação ao longo do tempo.
+
+Dependendo do seu acesso, o painel pode também mostrar um cartão **Pagamentos recentes** e um cartão **Conformidade
+documental**. Estes aparecem apenas quando a área de funcionalidade correspondente está ativada para o clube e é legível
+pelo utilizador.
+
+![Painel do BackOffice com cartões KPI e um gráfico de tendência](/images/guide/geral/dashboard.png)
+
+## Permissões e disponibilidade de funcionalidade: porque a sua barra lateral pode diferir
+
+O que vê no BackOffice depende de duas coisas a funcionarem em conjunto:
+
+1. **As suas permissões**. A sua função decide que áreas pode ler e que ações pode executar.
+2. **As funcionalidades ativadas no clube**. Algumas áreas existem apenas quando o clube tem essa funcionalidade ativada.
+
+Um item da barra lateral só aparece quando ambas as condições são verdadeiras: a funcionalidade está ativada para o
+clube e o utilizador tem acesso a ela. Por isso, dois colaboradores podem ver barras laterais diferentes sem que
+nada esteja quebrado.
+
+<InfoCallout title="Por trás das cenas">
+As permissões não são apenas visuais. Mesmo que escreva o URL de uma página diretamente, a aplicação continua a bloquear
+a entrada quando não tem acesso.
+</InfoCallout>
+
+<Callout title="Sobre fluxos públicos e ecrãs menos visíveis">
+Nem tudo o que o clube usa aparece sempre na barra lateral autenticada. Há também fluxos públicos, abertos a partir de
+links específicos, como a inscrição pública de atletas, a conclusão de dados do jogador, a adesão a sócio, o portal de
+pagamento e a loja pública. Esses fluxos existem no produto e estão documentados nas secções
+[Inscrições](/docs/inscricoes), [Pagamentos](/docs/pagamentos) e [Loja](/docs/loja).
+</Callout>
+
+## Onde obter ajuda
+
+- Utilize **Ajuda** no cabeçalho para abrir o manual oficial do BackOffice
+- Utilize **Reportar erro** quando algo se comportar de forma incorreta ou inesperada
+- Se um menu estiver em falta, contacte a pessoa que gere IAM e cargos para o seu clube
